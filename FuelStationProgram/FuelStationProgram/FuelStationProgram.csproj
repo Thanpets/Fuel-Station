@@ -46,12 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Entity.cs" />
+    <Compile Include="Base\ItemType.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Impl\Customer.cs" />
+    <Compile Include="Impl\Employee.cs" />
+    <Compile Include="Impl\Items.cs" />
+    <Compile Include="Impl\Ledger.cs" />
+    <Compile Include="Impl\Transaction.cs" />
+    <Compile Include="Impl\TransactionLine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -77,8 +85,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Base\" />
-    <Folder Include="Impl\" />
     <Folder Include="Queries\" />
     <Folder Include="Resources\" />
     <Folder Include="WUI\" />
