@@ -60,6 +60,12 @@
   <ItemGroup>
     <Compile Include="Base\Entity.cs" />
     <Compile Include="Base\ItemType.cs" />
+    <Compile Include="WUI\TransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WUI\TransactionForm.Designer.cs">
+      <DependentUpon>TransactionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WUI\ViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
