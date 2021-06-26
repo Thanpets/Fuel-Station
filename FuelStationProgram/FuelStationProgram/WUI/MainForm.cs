@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FuelStationProgram.Impl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,22 +12,25 @@ using System.Windows.Forms;
 
 namespace FuelStationProgram
 {
-    public partial class Form1 : Form {
+    public partial class MainForm : Form {
         public string ConnString { get; set; }
         public SqlConnection Conn { get; set; }
         public DataSet MasterData = new DataSet();
-        public Form1() {
+        public MainForm() {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e) {
-
+        private void MainForm_Load(object sender, EventArgs e) {
+            DataEditForm form = new DataEditForm();
+            form.EditObject = new Customer();
+            form.Show();
         }
 
         private void btnConnect_Click(object sender, EventArgs e) {
             
             SqlConnect();
         }
+
 
         private void SqlConnect() {
             ConnString = txtSqlPath.EditValue.ToString();
@@ -63,5 +67,7 @@ namespace FuelStationProgram
             }
             
         }
+
+        
     }
 }
