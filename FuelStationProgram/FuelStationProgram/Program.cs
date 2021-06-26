@@ -1,4 +1,4 @@
-﻿using FuelStationProgram.WUI;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace FuelStationProgram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MdiMainForm());
+            Application.Run(new ViewForm());
         }
     }
 }

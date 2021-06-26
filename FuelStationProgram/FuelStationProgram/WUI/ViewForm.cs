@@ -15,36 +15,97 @@ using System.Windows.Forms;
 
 namespace FuelStationProgram
 {
-    public partial class MainForm : Form {
+    public partial class ViewForm : Form
+    {
         public string ConnString { get; set; }
         public SqlConnection Conn { get; set; }
         public DataSet MasterData = new DataSet();
-        public MainForm() {
+        public ViewForm()
+        {
             InitializeComponent();
         }
-        private void MainForm_Load(object sender, EventArgs e) {
+
+        #region Events
+
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
         }
-        private void btnConnect_Click(object sender, EventArgs e) {
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+
             
+        }
+        private void btnLoadData_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        private void crtlExitApplication_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Application.Exit();
+        }
+        private void crtlConnectToDB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
             SqlConnect();
         }
-        private void btnLoadData_Click(object sender, EventArgs e) {
+        private void crtlLoadFromDB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
             SqlLoadTables();
         }
-        private void SqlConnect() {
+
+        private void crtlAddNewCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void crtlAddNewEmployee_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void crtlAddNewItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+        private void gridView1_DoubleClick(object sender, EventArgs e)
+        {
+            DataRow dr = ((GridView)gridControl1.MainView).GetFocusedDataRow();
+            Customer customer = new Customer
+            {
+                ID = new Guid(),
+                Name = dr.ItemArray[1].ToString(),
+                Surname = dr.ItemArray[2].ToString(),
+                CardNumber = 0
+            };
+            DataEditForm form = new DataEditForm();
+            form.EditObject = customer;
+            form.Show();
+        }
+        #endregion
+        #region Methods
+
+
+        private void SqlConnect()
+        {
             ConnString = txtSqlPath.EditValue.ToString();
-            try {
+            try
+            {
                 Conn = new SqlConnection(ConnString);
                 Conn.Open();
                 //Console.WriteLine(conn.State);
 
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
         }
-        private void SqlLoadTables() {
-            try {
+        private void SqlLoadTables()
+        {
+            try
+            {
 
                 SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM [dbo].[Customers]", Conn);
                 adapter.Fill(MasterData);
@@ -56,22 +117,15 @@ namespace FuelStationProgram
                 gridView1.OptionsView.ShowGroupPanel = false;
 
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
-        private void gridView1_DoubleClick(object sender, EventArgs e) {
-            DataRow dr = ((GridView)gridControl1.MainView).GetFocusedDataRow();
-            Customer customer = new Customer {
-                ID = new Guid(),
-                Name = dr.ItemArray[1].ToString(),
-                Surname = dr.ItemArray[2].ToString(),
-                CardNumber = 0
-            };
-            DataEditForm form = new DataEditForm();
-            form.EditObject = customer;
-            form.Show();
-        }
+        
+
+       
     }
+    #endregion
 }
