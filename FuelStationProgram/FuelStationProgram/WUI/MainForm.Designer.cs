@@ -77,10 +77,10 @@ namespace FuelStationProgram
             // 
             // gridControl1
             // 
-            this.gridControl1.Location = new System.Drawing.Point(12, 87);
+            this.gridControl1.Location = new System.Drawing.Point(12, 89);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(776, 277);
+            this.gridControl1.Size = new System.Drawing.Size(776, 275);
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -89,6 +89,8 @@ namespace FuelStationProgram
             // 
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // MainForm
             // 

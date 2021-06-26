@@ -32,11 +32,11 @@ namespace FuelStationProgram {
             this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
             this.grpFields = new DevExpress.XtraEditors.GroupControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
@@ -134,32 +134,14 @@ namespace FuelStationProgram {
             this.grpFields.TabIndex = 9;
             this.grpFields.Text = "groupControl1";
             // 
-            // labelControl1
+            // labelControl5
             // 
-            this.labelControl1.Location = new System.Drawing.Point(5, 45);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(63, 13);
-            this.labelControl1.TabIndex = 9;
-            this.labelControl1.Text = "labelControl1";
-            this.labelControl1.Visible = false;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(5, 85);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(63, 13);
-            this.labelControl2.TabIndex = 10;
-            this.labelControl2.Text = "labelControl2";
-            this.labelControl2.Visible = false;
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(5, 125);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(63, 13);
-            this.labelControl3.TabIndex = 11;
-            this.labelControl3.Text = "labelControl3";
-            this.labelControl3.Visible = false;
+            this.labelControl5.Location = new System.Drawing.Point(5, 205);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(63, 13);
+            this.labelControl5.TabIndex = 13;
+            this.labelControl5.Text = "labelControl5";
+            this.labelControl5.Visible = false;
             // 
             // labelControl4
             // 
@@ -170,14 +152,32 @@ namespace FuelStationProgram {
             this.labelControl4.Text = "labelControl4";
             this.labelControl4.Visible = false;
             // 
-            // labelControl5
+            // labelControl3
             // 
-            this.labelControl5.Location = new System.Drawing.Point(5, 205);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(63, 13);
-            this.labelControl5.TabIndex = 13;
-            this.labelControl5.Text = "labelControl5";
-            this.labelControl5.Visible = false;
+            this.labelControl3.Location = new System.Drawing.Point(5, 125);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(63, 13);
+            this.labelControl3.TabIndex = 11;
+            this.labelControl3.Text = "labelControl3";
+            this.labelControl3.Visible = false;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(5, 85);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(63, 13);
+            this.labelControl2.TabIndex = 10;
+            this.labelControl2.Text = "labelControl2";
+            this.labelControl2.Visible = false;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(5, 45);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(63, 13);
+            this.labelControl1.TabIndex = 9;
+            this.labelControl1.Text = "labelControl1";
+            this.labelControl1.Visible = false;
             // 
             // DataEditForm
             // 
@@ -187,6 +187,7 @@ namespace FuelStationProgram {
             this.Controls.Add(this.grpFields);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "DataEditForm";
             this.Text = "DataEditForm";
             this.Load += new System.EventHandler(this.DataEditForm_Load);

@@ -1,4 +1,7 @@
-﻿using FuelStationProgram.Impl;
+﻿using DevExpress.Utils;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using FuelStationProgram.Impl;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,19 +22,15 @@ namespace FuelStationProgram
         public MainForm() {
             InitializeComponent();
         }
-
         private void MainForm_Load(object sender, EventArgs e) {
-            DataEditForm form = new DataEditForm();
-            form.EditObject = new Customer();
-            form.Show();
         }
-
         private void btnConnect_Click(object sender, EventArgs e) {
             
             SqlConnect();
         }
-
-
+        private void btnLoadData_Click(object sender, EventArgs e) {
+            SqlLoadTables();
+        }
         private void SqlConnect() {
             ConnString = txtSqlPath.EditValue.ToString();
             try {
@@ -44,11 +43,6 @@ namespace FuelStationProgram
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void btnLoadData_Click(object sender, EventArgs e) {
-            SqlLoadTables();
-        }
-
         private void SqlLoadTables() {
             try {
 
@@ -67,7 +61,17 @@ namespace FuelStationProgram
             }
             
         }
-
-        
+        private void gridView1_DoubleClick(object sender, EventArgs e) {
+            DataRow dr = ((GridView)gridControl1.MainView).GetFocusedDataRow();
+            Customer customer = new Customer {
+                ID = new Guid(),
+                Name = dr.ItemArray[1].ToString(),
+                Surname = dr.ItemArray[2].ToString(),
+                CardNumber = 0
+            };
+            DataEditForm form = new DataEditForm();
+            form.EditObject = customer;
+            form.Show();
+        }
     }
 }
