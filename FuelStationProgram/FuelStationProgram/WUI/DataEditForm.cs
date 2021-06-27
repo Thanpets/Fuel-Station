@@ -89,7 +89,7 @@ namespace FuelStationProgram {
             try {
                 customer.Name = textEdit1.EditValue.ToString();
                 customer.Surname = textEdit2.EditValue.ToString();
-                customer.CardNumber = Convert.ToInt32(textEdit3.EditValue);
+                customer.CardNumber = Convert.ToInt32(calcEdit1.EditValue);
             }
             catch (System.NullReferenceException ex) {
                 MessageBox.Show(ex.Message);
