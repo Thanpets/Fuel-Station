@@ -25,11 +25,10 @@ namespace FuelStationProgram {
                     CustomerLayout(customer);
                     break;
                 case Employee employee:
+                    EmployeeLayout(employee);
                     break;
                 case Items item:
                     ItemLayout(item);
-                    break;
-                case Transaction transaction:
                     break;
             }
         }
@@ -40,10 +39,10 @@ namespace FuelStationProgram {
                     CustomerEdit(customer);
                     break;
                 case Employee employee:
+                    EmployeeEdit(employee);
                     break;
                 case Items item:
-                    break;
-                case Transaction transaction:
+                    ItemEdit(item);
                     break;
             }
             DialogResult = DialogResult.OK;
@@ -60,7 +59,7 @@ namespace FuelStationProgram {
             grpFields.Text = "Customer Details";
             labelControl1.Text = "Name:";
             labelControl2.Text = "Surname:";
-            labelControl3.Text = "Card Number";
+            labelControl3.Text = "Card Number:";
             labelControl1.Visible = true;
             labelControl2.Visible = true;
             labelControl3.Visible = true;
@@ -100,6 +99,7 @@ namespace FuelStationProgram {
             labelControl5.Visible = true;
 
             textEdit1.Visible = true;
+            textEdit2.Visible = true;
             comboBoxEdit1.Visible = true;
             calcEdit1.Visible = true;
             calcEdit2.Visible = true;
@@ -111,14 +111,14 @@ namespace FuelStationProgram {
             foreach (ItemType i in Enum.GetValues(typeof(ItemType))) {
                 comboBoxEdit1.Properties.Items.Add(i.ToString());
             }
+            calcEdit1.Properties.MaskSettings.Configure<MaskSettings.Numeric>(settings => {
+                settings.MaskExpression = "C";
+            });
             calcEdit2.Properties.MaskSettings.Configure<MaskSettings.Numeric>(settings => {
                 settings.MaskExpression = "C";
-                settings.ValueAfterDelete = NumericMaskManager.ValueAfterDelete.ZeroThenNull;
             });
-            calcEdit2.Properties.MaskSettings.Configure<MaskSettings.Numeric>(settings => {
-                settings.MaskExpression = "####";
-                settings.ValueAfterDelete = NumericMaskManager.ValueAfterDelete.ZeroThenNull;
-            });
+            calcEdit1.Properties.Buttons.Clear();
+            calcEdit2.Properties.Buttons.Clear();
 
             textEdit1.Text = item.Code.ToString();
             textEdit2.Text = item.Description;
@@ -128,11 +128,65 @@ namespace FuelStationProgram {
             calcEdit2.Text = item.Cost.ToString();
         }
 
-        private void ItemEdit(Customer customer) {
+        private void ItemEdit(Items item) {
             try {
-                customer.Name = textEdit1.EditValue.ToString();
-                customer.Surname = textEdit2.EditValue.ToString();
-                customer.CardNumber = (Int32)textEdit3.EditValue;
+                item.Code = Convert.ToInt32(textEdit1.EditValue);
+                item.Description = textEdit2.EditValue.ToString();
+                item.ItemType = (ItemType)Enum.Parse(typeof(ItemType), comboBoxEdit1.EditValue.ToString());
+                item.Price = Convert.ToDecimal(calcEdit1.EditValue);
+                item.Cost = Convert.ToDecimal(calcEdit2.EditValue);
+            }
+            catch (System.NullReferenceException ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Employee
+        private void EmployeeLayout(Employee employee) {
+            grpFields.Text = "Employee Details";
+            labelControl1.Text = "Name:";
+            labelControl2.Text = "Surname:";
+            labelControl3.Text = "Start Date:";
+            labelControl4.Text = "End Date:";
+            labelControl4.Text = "Salary:";
+
+            labelControl1.Visible = true;
+            labelControl2.Visible = true;
+            labelControl3.Visible = true;
+            labelControl4.Visible = true;
+            labelControl5.Visible = true;
+            
+            textEdit1.Visible = true;
+            textEdit2.Visible = true;
+            dateEdit1.Visible = true;
+            dateEdit2.Visible = true;
+            calcEdit1.Visible = true;
+
+
+            dateEdit1.Location = new Point(126, 122);
+            dateEdit2.Location = new Point(126, 162);
+            calcEdit1.Location = new Point(126, 202);
+
+            calcEdit1.Properties.MaskSettings.Configure<MaskSettings.Numeric>(settings => {
+                settings.MaskExpression = "C";
+            });
+            calcEdit1.Properties.Buttons.Clear();
+
+            textEdit1.Text = employee.Name;
+            textEdit2.Text = employee.Surname;
+            dateEdit1.Text = employee.DateStart.ToString();
+            dateEdit2.Text = employee.DateEnd.ToString();
+            calcEdit1.Text = employee.Salary.ToString();
+        }
+
+        private void EmployeeEdit(Employee employee) {
+            try {
+                employee.Name = textEdit1.EditValue.ToString();
+                employee.Surname = textEdit2.EditValue.ToString();
+                employee.DateStart = Convert.ToDateTime(dateEdit1.EditValue);
+                employee.DateEnd = Convert.ToDateTime(dateEdit2.EditValue);
+                employee.Salary = Convert.ToDecimal(calcEdit1.EditValue);
             }
             catch (System.NullReferenceException ex) {
                 MessageBox.Show(ex.Message);
