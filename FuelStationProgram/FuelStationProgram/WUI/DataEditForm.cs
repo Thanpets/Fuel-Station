@@ -60,22 +60,36 @@ namespace FuelStationProgram {
             labelControl1.Text = "Name:";
             labelControl2.Text = "Surname:";
             labelControl3.Text = "Card Number:";
+
             labelControl1.Visible = true;
             labelControl2.Visible = true;
             labelControl3.Visible = true;
             textEdit1.Visible = true;
             textEdit2.Visible = true;
-            textEdit3.Visible = true;
-            textEdit1.Text = customer.Name;
-            textEdit2.Text = customer.Surname;
-            textEdit3.Text = customer.CardNumber.ToString();
+            calcEdit1.Visible = true;
+            textEdit1.TabIndex = 1;
+            textEdit2.TabIndex = 2;
+            calcEdit1.TabIndex = 3;
+
+            calcEdit1.Location = new Point(126, 122);
+            
+            calcEdit1.Properties.MaskSettings.Configure<MaskSettings.Numeric>(settings => {
+                settings.MaskExpression = "####";
+            });
+            calcEdit1.Properties.Buttons.Clear();
+
+            if (customer.Name != null) {
+                textEdit1.Text = customer.Name;
+                textEdit2.Text = customer.Surname;
+                calcEdit1.Text = customer.CardNumber.ToString();
+            }
         }
 
         private void CustomerEdit(Customer customer) {
             try {
                 customer.Name = textEdit1.EditValue.ToString();
                 customer.Surname = textEdit2.EditValue.ToString();
-                customer.CardNumber = (Int32)textEdit3.EditValue;
+                customer.CardNumber = Convert.ToInt32(textEdit3.EditValue);
             }
             catch (System.NullReferenceException ex) {
                 MessageBox.Show(ex.Message);
@@ -103,6 +117,11 @@ namespace FuelStationProgram {
             comboBoxEdit1.Visible = true;
             calcEdit1.Visible = true;
             calcEdit2.Visible = true;
+            textEdit1.TabIndex = 1;
+            textEdit2.TabIndex = 2;
+            comboBoxEdit1.TabIndex = 3;
+            calcEdit1.TabIndex = 4;
+            calcEdit2.TabIndex = 5;
 
             comboBoxEdit1.Location = new Point(126,122);
             calcEdit1.Location = new Point(126, 162);
@@ -120,12 +139,14 @@ namespace FuelStationProgram {
             calcEdit1.Properties.Buttons.Clear();
             calcEdit2.Properties.Buttons.Clear();
 
-            textEdit1.Text = item.Code.ToString();
-            textEdit2.Text = item.Description;
-            textEdit3.Text = item.ItemType.ToString();
-            comboBoxEdit1.Text = item.ItemType.ToString();
-            calcEdit1.Text = item.Price.ToString();
-            calcEdit2.Text = item.Cost.ToString();
+            if (item.Description != null) {
+                textEdit1.Text = item.Code.ToString();
+                textEdit2.Text = item.Description;
+                textEdit3.Text = item.ItemType.ToString();
+                comboBoxEdit1.Text = item.ItemType.ToString();
+                calcEdit1.Text = item.Price.ToString();
+                calcEdit2.Text = item.Cost.ToString();
+            }
         }
 
         private void ItemEdit(Items item) {
@@ -149,19 +170,23 @@ namespace FuelStationProgram {
             labelControl2.Text = "Surname:";
             labelControl3.Text = "Start Date:";
             labelControl4.Text = "End Date:";
-            labelControl4.Text = "Salary:";
+            labelControl5.Text = "Salary:";
 
             labelControl1.Visible = true;
             labelControl2.Visible = true;
             labelControl3.Visible = true;
             labelControl4.Visible = true;
             labelControl5.Visible = true;
-            
             textEdit1.Visible = true;
             textEdit2.Visible = true;
             dateEdit1.Visible = true;
             dateEdit2.Visible = true;
             calcEdit1.Visible = true;
+            textEdit1.TabIndex = 1;
+            textEdit2.TabIndex = 2;
+            dateEdit1.TabIndex = 3;
+            dateEdit2.TabIndex = 4;
+            calcEdit1.TabIndex = 5;
 
 
             dateEdit1.Location = new Point(126, 122);
@@ -173,11 +198,13 @@ namespace FuelStationProgram {
             });
             calcEdit1.Properties.Buttons.Clear();
 
-            textEdit1.Text = employee.Name;
-            textEdit2.Text = employee.Surname;
-            dateEdit1.Text = employee.DateStart.ToString();
-            dateEdit2.Text = employee.DateEnd.ToString();
-            calcEdit1.Text = employee.Salary.ToString();
+            if (employee.Name != null) {
+                textEdit1.Text = employee.Name;
+                textEdit2.Text = employee.Surname;
+                dateEdit1.Text = employee.DateStart.ToString();
+                dateEdit2.Text = employee.DateEnd.ToString();
+                calcEdit1.Text = employee.Salary.ToString();
+            }
         }
 
         private void EmployeeEdit(Employee employee) {
