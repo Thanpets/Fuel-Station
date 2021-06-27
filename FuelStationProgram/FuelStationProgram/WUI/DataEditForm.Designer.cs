@@ -37,6 +37,9 @@ namespace FuelStationProgram {
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.calcEdit1 = new DevExpress.XtraEditors.CalcEdit();
+            this.calcEdit2 = new DevExpress.XtraEditors.CalcEdit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
@@ -44,6 +47,9 @@ namespace FuelStationProgram {
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpFields)).BeginInit();
             this.grpFields.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calcEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calcEdit2.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOK
@@ -118,6 +124,9 @@ namespace FuelStationProgram {
             // 
             // grpFields
             // 
+            this.grpFields.Controls.Add(this.calcEdit2);
+            this.grpFields.Controls.Add(this.calcEdit1);
+            this.grpFields.Controls.Add(this.comboBoxEdit1);
             this.grpFields.Controls.Add(this.labelControl5);
             this.grpFields.Controls.Add(this.labelControl4);
             this.grpFields.Controls.Add(this.labelControl3);
@@ -179,6 +188,36 @@ namespace FuelStationProgram {
             this.labelControl1.Text = "labelControl1";
             this.labelControl1.Visible = false;
             // 
+            // comboBoxEdit1
+            // 
+            this.comboBoxEdit1.Location = new System.Drawing.Point(347, 42);
+            this.comboBoxEdit1.Name = "comboBoxEdit1";
+            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit1.Size = new System.Drawing.Size(100, 20);
+            this.comboBoxEdit1.TabIndex = 14;
+            this.comboBoxEdit1.Visible = false;
+            // 
+            // calcEdit1
+            // 
+            this.calcEdit1.Location = new System.Drawing.Point(347, 82);
+            this.calcEdit1.Name = "calcEdit1";
+            this.calcEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.calcEdit1.Size = new System.Drawing.Size(100, 20);
+            this.calcEdit1.TabIndex = 15;
+            this.calcEdit1.Visible = false;
+            // 
+            // calcEdit2
+            // 
+            this.calcEdit2.Location = new System.Drawing.Point(347, 122);
+            this.calcEdit2.Name = "calcEdit2";
+            this.calcEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.calcEdit2.Size = new System.Drawing.Size(100, 20);
+            this.calcEdit2.TabIndex = 16;
+            this.calcEdit2.Visible = false;
+            // 
             // DataEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,6 +238,9 @@ namespace FuelStationProgram {
             ((System.ComponentModel.ISupportInitialize)(this.grpFields)).EndInit();
             this.grpFields.ResumeLayout(false);
             this.grpFields.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calcEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calcEdit2.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -218,5 +260,8 @@ namespace FuelStationProgram {
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
+        private DevExpress.XtraEditors.CalcEdit calcEdit2;
+        private DevExpress.XtraEditors.CalcEdit calcEdit1;
     }
 }
