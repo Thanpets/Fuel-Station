@@ -67,7 +67,16 @@ namespace FuelStationProgram {
         ///	[Surname] [varchar](40) NOT NULL,
         ///	[CardNumber] [int] NOT NULL
         ///)
-        ///
+        ///.
+        /// </summary>
+        internal static string CreateCustomers {
+            get {
+                return ResourceManager.GetString("CreateCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
         ///CREATE TABLE [dbo].[Employees](
         ///	[ID] [uniqueidentifier] NOT NULL,
         ///	[Name] [varchar](40) NOT NULL,
@@ -76,15 +85,52 @@ namespace FuelStationProgram {
         ///	[DateEnd] [date] NOT NULL,
         ///	[Salary] [decimal](18,2) NOT NULL
         ///)
-        ///
+        ///.
+        /// </summary>
+        internal static string CreateEmployees {
+            get {
+                return ResourceManager.GetString("CreateEmployees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
         ///CREATE TABLE [dbo].[Items](
         ///	[ID] [uniqueidentifier] NOT NULL,
         ///	[Code] [nvarchar](40) NOT NULL,
-        ///	 [rest of string was truncated]&quot;;.
+        ///	[Description] [nvarchar](255) NOT NULL,
+        ///	[ItemType] [nvarchar](40) NOT NULL,
+        ///	[Price] [decimal](18, 2) NOT NULL,
+        ///	[Cost] [decimal](18, 2) NOT NULL
+        ///).
         /// </summary>
-        internal static string CreateTables {
+        internal static string CreateItems {
             get {
-                return ResourceManager.GetString("CreateTables", resourceCulture);
+                return ResourceManager.GetString("CreateItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///CREATE TABLE [dbo].[Transactions](
+        ///    [ID] [uniqueidentifier] NOT NULL,
+        ///    [Date] [date] NOT NULL,
+        ///    [CustomerID] [uniqueidentifier] NOT NULL,
+        ///	[DiscountValue] [decimal](18, 2) NOT NULL,
+        ///	[TotalValue] [decimal](18, 2) NOT NULL
+        ///)
+        ///
+        ///CREATE TABLE [dbo].[TransactionLines](
+        ///    [ID] [uniqueidentifier] NOT NULL,
+        ///    [TransactionID] [uniqueidentifier] NOT NULL,
+        ///    [ItemID] [uniqueidentifier] NOT NULL,
+        ///    Quantity [int] NOT NULL,
+        ///	[ItemPrice] [decimal](18, 2) NOT NULL,
+        ///	[Value] [decimal](18, 2) [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CreateTransactions {
+            get {
+                return ResourceManager.GetString("CreateTransactions", resourceCulture);
             }
         }
         

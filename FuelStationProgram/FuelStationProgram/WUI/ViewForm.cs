@@ -111,6 +111,7 @@ namespace FuelStationProgram
         private void SqlLoadTables()
         {
             try {
+                return;
                 SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectCustomers, Conn);
                 MasterData.Clear();
                 adapter.Fill(MasterData, "Customers");
