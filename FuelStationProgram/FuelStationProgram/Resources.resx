@@ -133,4 +133,13 @@
   <data name="SelectCustomers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\selectcustomers.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="SelectEmployees" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\selectemployees.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SelectItems" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\selectitems.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SelectTransactions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\selecttransactions.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>

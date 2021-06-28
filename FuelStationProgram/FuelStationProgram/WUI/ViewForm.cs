@@ -29,7 +29,10 @@ namespace FuelStationProgram
         #region Events
 
         private void ViewForm_Load(object sender, EventArgs e) {
-
+            gridControlCustomers.Visible = false;
+            gridControlEmployees.Visible = false;
+            gridControlItems.Visible = false;
+            gridControlTransactions.Visible = false;
         }
 
 
@@ -76,7 +79,7 @@ namespace FuelStationProgram
         }
         private void editCustomer(object sender, EventArgs e)
         {
-            DataRow dr = ((GridView)gridControl1.MainView).GetFocusedDataRow();
+            DataRow dr = ((GridView)gridControlCustomers.MainView).GetFocusedDataRow();
             Customer customer = new Customer
             {
                 ID = new Guid(),
@@ -99,8 +102,6 @@ namespace FuelStationProgram
             {
                 Conn = new SqlConnection(ConnString);
                 Conn.Open();
-                //Console.WriteLine(conn.State);
-
             }
             catch (Exception ex)
             {
@@ -109,44 +110,68 @@ namespace FuelStationProgram
         }
         private void SqlLoadTables()
         {
-            try
-            {
-                SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectCustomers, Conn);
-                adapter.Fill(MasterData);
-                gridControl1.DataSource = MasterData.Tables[0];
-
-                gridControl1.Refresh();
-
-
-                gridView1.OptionsView.ShowGroupPanel = false;
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-
-        private void RefreshTables() {
             try {
                 SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectCustomers, Conn);
                 MasterData.Clear();
-                adapter.Fill(MasterData);
+                adapter.Fill(MasterData, "Customers");
+                gridControlCustomers.DataSource = MasterData.Tables["Customers"];
 
-                
-                gridControl1.Refresh();
+                adapter = new SqlDataAdapter(Resources.SelectEmployees, Conn);
+                adapter.Fill(MasterData, "Employees");
+                gridControlEmployees.DataSource = MasterData.Tables["Employees"];
+
+                adapter = new SqlDataAdapter(Resources.SelectItems, Conn);
+                adapter.Fill(MasterData, "Items");
+                gridControlItems.DataSource = MasterData.Tables["Items"];
+
+
+                //adapter.SelectCommand = new SqlCommand(Resources.SelectTransactions, Conn);
+                //adapter.Fill(MasterData, "Transactions");
+                //gridControlItems.DataSource = MasterData.Tables["Transactions"];
+
+
+                gridControlCustomers.Refresh();
+                gridControlCustomers.Visible = true;
+                gridView1.Columns["ID"].Visible = false;
                 gridView1.BeginDataUpdate();
                 gridView1.ClearSorting();
                 gridView1.Columns[2].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
                 gridView1.EndDataUpdate();
-                
+
+                gridControlEmployees.Refresh();
+                gridControlEmployees.Visible = true;
+                gridView2.Columns["ID"].Visible = false;
+                gridView2.BeginDataUpdate();
+                gridView2.ClearSorting();
+                gridView2.Columns[2].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                gridView2.EndDataUpdate();
+
+                gridControlItems.Refresh();
+                gridControlItems.Visible = true;
+                gridView3.Columns["ID"].Visible = false;
+                gridView3.BeginDataUpdate();
+                gridView3.ClearSorting();
+                gridView3.Columns["Description"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                gridView3.EndDataUpdate();
+
+                //gridControlTransactions.Refresh();
+                //gridControlTransactions.Visible = true;
+                //gridView4.Columns["ID"].Visible = false;
+                //gridView4.BeginDataUpdate();
+                //gridView4.ClearSorting();
+                //gridView4.Columns["Date"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                //gridView4.EndDataUpdate();
+
 
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void RefreshTables() {
+            gridControlCustomers.Refresh();
         }
 
         private void AddCustomer() {
@@ -215,6 +240,7 @@ namespace FuelStationProgram
                 }
             }
         }
+
     }
     #endregion
 }

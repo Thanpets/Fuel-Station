@@ -32,7 +32,7 @@ namespace FuelStationProgram
             this.components = new System.ComponentModel.Container();
             this.txtSqlPath = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gridControlCustomers = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -53,11 +53,35 @@ namespace FuelStationProgram
             this.crtlNewTransaction = new DevExpress.XtraEditors.SimpleButton();
             this.crtlCustomerCardNumber = new DevExpress.XtraEditors.TextEdit();
             this.label2 = new System.Windows.Forms.Label();
+            this.xtraTabPane = new DevExpress.XtraTab.XtraTabControl();
+            this.tabCustomers = new DevExpress.XtraTab.XtraTabPage();
+            this.tabEmployees = new DevExpress.XtraTab.XtraTabPage();
+            this.gridControlEmployees = new DevExpress.XtraGrid.GridControl();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.tabItems = new DevExpress.XtraTab.XtraTabPage();
+            this.gridControlItems = new DevExpress.XtraGrid.GridControl();
+            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.tabTransactions = new DevExpress.XtraTab.XtraTabPage();
+            this.gridControlTransactions = new DevExpress.XtraGrid.GridControl();
+            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.tabLedger = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.txtSqlPath.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtlCustomerCardNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabPane)).BeginInit();
+            this.xtraTabPane.SuspendLayout();
+            this.tabCustomers.SuspendLayout();
+            this.tabEmployees.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlEmployees)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            this.tabItems.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlItems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
+            this.tabTransactions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlTransactions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // txtSqlPath
@@ -78,19 +102,19 @@ namespace FuelStationProgram
             this.labelControl1.TabIndex = 1;
             this.labelControl1.Text = "SQL Path";
             // 
-            // gridControl1
+            // gridControlCustomers
             // 
-            this.gridControl1.Location = new System.Drawing.Point(0, 26);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(776, 275);
-            this.gridControl1.TabIndex = 5;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridControlCustomers.Location = new System.Drawing.Point(0, 0);
+            this.gridControlCustomers.MainView = this.gridView1;
+            this.gridControlCustomers.Name = "gridControlCustomers";
+            this.gridControlCustomers.Size = new System.Drawing.Size(749, 329);
+            this.gridControlCustomers.TabIndex = 5;
+            this.gridControlCustomers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
             // gridView1
             // 
-            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.GridControl = this.gridControlCustomers;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
             // 
@@ -239,7 +263,7 @@ namespace FuelStationProgram
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(122, 330);
+            this.label1.Location = new System.Drawing.Point(55, 369);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 13);
             this.label1.TabIndex = 15;
@@ -270,16 +294,112 @@ namespace FuelStationProgram
             this.label2.TabIndex = 18;
             this.label2.Text = "Customer Card Number:";
             // 
+            // xtraTabPane
+            // 
+            this.xtraTabPane.Location = new System.Drawing.Point(0, 46);
+            this.xtraTabPane.Name = "xtraTabPane";
+            this.xtraTabPane.SelectedTabPage = this.tabCustomers;
+            this.xtraTabPane.Size = new System.Drawing.Size(942, 352);
+            this.xtraTabPane.TabIndex = 29;
+            this.xtraTabPane.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tabCustomers,
+            this.tabEmployees,
+            this.tabItems,
+            this.tabTransactions,
+            this.tabLedger});
+            // 
+            // tabCustomers
+            // 
+            this.tabCustomers.Controls.Add(this.gridControlCustomers);
+            this.tabCustomers.Name = "tabCustomers";
+            this.tabCustomers.Size = new System.Drawing.Size(940, 327);
+            this.tabCustomers.Text = "Customers";
+            // 
+            // tabEmployees
+            // 
+            this.tabEmployees.Controls.Add(this.gridControlEmployees);
+            this.tabEmployees.Name = "tabEmployees";
+            this.tabEmployees.Size = new System.Drawing.Size(940, 327);
+            this.tabEmployees.Text = "Employees";
+            // 
+            // gridControlEmployees
+            // 
+            this.gridControlEmployees.Location = new System.Drawing.Point(0, 0);
+            this.gridControlEmployees.MainView = this.gridView2;
+            this.gridControlEmployees.Name = "gridControlEmployees";
+            this.gridControlEmployees.Size = new System.Drawing.Size(749, 329);
+            this.gridControlEmployees.TabIndex = 30;
+            this.gridControlEmployees.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView2});
+            // 
+            // gridView2
+            // 
+            this.gridView2.GridControl = this.gridControlEmployees;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsBehavior.Editable = false;
+            // 
+            // tabItems
+            // 
+            this.tabItems.Controls.Add(this.gridControlItems);
+            this.tabItems.Name = "tabItems";
+            this.tabItems.Size = new System.Drawing.Size(940, 327);
+            this.tabItems.Text = "Items";
+            // 
+            // gridControlItems
+            // 
+            this.gridControlItems.Location = new System.Drawing.Point(0, 0);
+            this.gridControlItems.MainView = this.gridView3;
+            this.gridControlItems.MenuManager = this.barManager1;
+            this.gridControlItems.Name = "gridControlItems";
+            this.gridControlItems.Size = new System.Drawing.Size(749, 329);
+            this.gridControlItems.TabIndex = 0;
+            this.gridControlItems.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView3});
+            // 
+            // gridView3
+            // 
+            this.gridView3.GridControl = this.gridControlItems;
+            this.gridView3.Name = "gridView3";
+            // 
+            // tabTransactions
+            // 
+            this.tabTransactions.Controls.Add(this.gridControlTransactions);
+            this.tabTransactions.Name = "tabTransactions";
+            this.tabTransactions.Size = new System.Drawing.Size(940, 327);
+            this.tabTransactions.Text = "Transactions";
+            // 
+            // gridControlTransactions
+            // 
+            this.gridControlTransactions.Location = new System.Drawing.Point(0, 0);
+            this.gridControlTransactions.MainView = this.gridView4;
+            this.gridControlTransactions.MenuManager = this.barManager1;
+            this.gridControlTransactions.Name = "gridControlTransactions";
+            this.gridControlTransactions.Size = new System.Drawing.Size(749, 329);
+            this.gridControlTransactions.TabIndex = 1;
+            this.gridControlTransactions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView4});
+            // 
+            // gridView4
+            // 
+            this.gridView4.GridControl = this.gridControlTransactions;
+            this.gridView4.Name = "gridView4";
+            // 
+            // tabLedger
+            // 
+            this.tabLedger.Name = "tabLedger";
+            this.tabLedger.Size = new System.Drawing.Size(940, 327);
+            this.tabLedger.Text = "Ledger";
+            // 
             // ViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1054, 593);
+            this.Controls.Add(this.xtraTabPane);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.crtlCustomerCardNumber);
             this.Controls.Add(this.crtlNewTransaction);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txtSqlPath);
             this.Controls.Add(this.barDockControlLeft);
@@ -290,10 +410,22 @@ namespace FuelStationProgram
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.ViewForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtSqlPath.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlCustomers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtlCustomerCardNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabPane)).EndInit();
+            this.xtraTabPane.ResumeLayout(false);
+            this.tabCustomers.ResumeLayout(false);
+            this.tabEmployees.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlEmployees)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            this.tabItems.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
+            this.tabTransactions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlTransactions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,7 +435,7 @@ namespace FuelStationProgram
 
         private DevExpress.XtraEditors.TextEdit txtSqlPath;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.GridControl gridControlCustomers;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar2;
@@ -324,6 +456,18 @@ namespace FuelStationProgram
         private DevExpress.XtraEditors.TextEdit crtlCustomerCardNumber;
         private DevExpress.XtraEditors.SimpleButton crtlNewTransaction;
         private System.Windows.Forms.Label label1;
+        private DevExpress.XtraTab.XtraTabControl xtraTabPane;
+        private DevExpress.XtraTab.XtraTabPage tabItems;
+        private DevExpress.XtraGrid.GridControl gridControlItems;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraTab.XtraTabPage tabCustomers;
+        private DevExpress.XtraGrid.GridControl gridControlEmployees;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraTab.XtraTabPage tabEmployees;
+        private DevExpress.XtraTab.XtraTabPage tabTransactions;
+        private DevExpress.XtraGrid.GridControl gridControlTransactions;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
+        private DevExpress.XtraTab.XtraTabPage tabLedger;
     }
 }
 

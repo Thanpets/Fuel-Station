@@ -72,14 +72,15 @@ namespace FuelStationProgram {
         ///	[ID] [uniqueidentifier] NOT NULL,
         ///	[Name] [varchar](40) NOT NULL,
         ///	[Surname] [varchar](40) NOT NULL,
+        ///	[DateStart] [date] NOT NULL,
+        ///	[DateEnd] [date] NOT NULL,
         ///	[Salary] [decimal](18,2) NOT NULL
         ///)
         ///
         ///CREATE TABLE [dbo].[Items](
         ///	[ID] [uniqueidentifier] NOT NULL,
         ///	[Code] [nvarchar](40) NOT NULL,
-        ///	[Description] [nvarchar](255) NOT NULL,
-        ///	[ItemType] [nvarch [rest of string was truncated]&quot;;.
+        ///	 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CreateTables {
             get {
@@ -120,7 +121,7 @@ namespace FuelStationProgram {
         ///           @DateStart,
         ///           @DateEnd,
         ///           @Salary)
-        ///GO.
+        ///.
         /// </summary>
         internal static string InsertEmployee {
             get {
@@ -143,7 +144,7 @@ namespace FuelStationProgram {
         ///           @ItemType,
         ///           @Price,
         ///           @Cost)
-        ///GO.
+        ///.
         /// </summary>
         internal static string InsertItem {
             get {
@@ -157,6 +158,33 @@ namespace FuelStationProgram {
         internal static string SelectCustomers {
             get {
                 return ResourceManager.GetString("SelectCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT * FROM [dbo].[Employees].
+        /// </summary>
+        internal static string SelectEmployees {
+            get {
+                return ResourceManager.GetString("SelectEmployees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT * FROM [dbo].[Items].
+        /// </summary>
+        internal static string SelectItems {
+            get {
+                return ResourceManager.GetString("SelectItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT * FROM [dbo].[Transactions].
+        /// </summary>
+        internal static string SelectTransactions {
+            get {
+                return ResourceManager.GetString("SelectTransactions", resourceCulture);
             }
         }
     }
