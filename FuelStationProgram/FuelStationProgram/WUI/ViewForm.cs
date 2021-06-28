@@ -2,6 +2,7 @@
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using FuelStationProgram.Impl;
+using FuelStationProgram.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,18 +28,8 @@ namespace FuelStationProgram
 
         #region Events
 
+        private void ViewForm_Load(object sender, EventArgs e) {
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-        }
-        private void btnConnect_Click(object sender, EventArgs e)
-        {
-
-            
-        }
-        private void btnLoadData_Click(object sender, EventArgs e)
-        {
-            
         }
 
 
@@ -55,21 +46,35 @@ namespace FuelStationProgram
             SqlLoadTables();
         }
 
-        private void crtlAddNewCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-
+        private void crtlAddNewCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+            if (true) {
+                AddCustomer();
+            }
+            else {
+                MessageBox.Show("No database connection has been established");
+            }
         }
 
-        private void crtlAddNewEmployee_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
 
+
+        private void crtlAddNewEmployee_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+            if (true) {
+                AddEmployee();
+            }
+            else {
+                MessageBox.Show("No database connection has been established");
+            }
         }
 
-        private void crtlAddNewItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-
+        private void crtlAddNewItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+            if (true) {
+                AddItem();
+            }
+            else {
+                MessageBox.Show("No database connection has been established");
+            }
         }
-        private void gridView1_DoubleClick(object sender, EventArgs e)
+        private void editCustomer(object sender, EventArgs e)
         {
             DataRow dr = ((GridView)gridControl1.MainView).GetFocusedDataRow();
             Customer customer = new Customer
@@ -106,8 +111,7 @@ namespace FuelStationProgram
         {
             try
             {
-
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM [dbo].[Customers]", Conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectCustomers, Conn);
                 adapter.Fill(MasterData);
                 gridControl1.DataSource = MasterData.Tables[0];
 
@@ -123,9 +127,94 @@ namespace FuelStationProgram
             }
 
         }
-        
 
-       
+        private void RefreshTables() {
+            try {
+                SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectCustomers, Conn);
+                MasterData.Clear();
+                adapter.Fill(MasterData);
+
+                
+                gridControl1.Refresh();
+                gridView1.BeginDataUpdate();
+                gridView1.ClearSorting();
+                gridView1.Columns[2].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                gridView1.EndDataUpdate();
+                
+
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void AddCustomer() {
+            DataEditForm form = new DataEditForm();
+            Customer newCustomer = new Customer();
+            form.EditObject = newCustomer;
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK) {
+                try {
+                    SqlCommand cmd = new SqlCommand(Resources.InsertCustomer, Conn);
+                    cmd.Parameters.AddWithValue("@ID", newCustomer.ID);
+                    cmd.Parameters.AddWithValue("@Name", newCustomer.Name);
+                    cmd.Parameters.AddWithValue("@Surname", newCustomer.Surname);
+                    cmd.Parameters.AddWithValue("@CardNumber", newCustomer.CardNumber);
+                    cmd.ExecuteNonQuery();
+                    RefreshTables();
+                }
+                catch (Exception e) {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
+
+        private void AddEmployee() {
+            DataEditForm form = new DataEditForm();
+            Employee newEmployee = new Employee();
+            form.EditObject = newEmployee;
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK) {
+                try {
+                    SqlCommand cmd = new SqlCommand(Resources.InsertEmployee, Conn);
+                    cmd.Parameters.AddWithValue("@ID", newEmployee.ID);
+                    cmd.Parameters.AddWithValue("@Name", newEmployee.Name);
+                    cmd.Parameters.AddWithValue("@Surname", newEmployee.Surname);
+                    cmd.Parameters.AddWithValue("@DateStart", newEmployee.DateStart.Date);
+                    cmd.Parameters.AddWithValue("@DateEnd", newEmployee.DateEnd.Date);
+                    cmd.Parameters.AddWithValue("@Salary", newEmployee.Salary);
+                    cmd.ExecuteNonQuery();
+                    RefreshTables();
+                }
+                catch (Exception e) {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
+
+        private void AddItem() {
+            DataEditForm form = new DataEditForm();
+            Items newItem = new Items();
+            form.EditObject = newItem;
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK) {
+                try {
+                    SqlCommand cmd = new SqlCommand(Resources.InsertItem, Conn);
+                    cmd.Parameters.AddWithValue("@ID", newItem.ID);
+                    cmd.Parameters.AddWithValue("@Code", newItem.Code);
+                    cmd.Parameters.AddWithValue("@Description", newItem.Description);
+                    cmd.Parameters.AddWithValue("@ItemType", newItem.ItemType.ToString());
+                    cmd.Parameters.AddWithValue("@Price", newItem.Price);
+                    cmd.Parameters.AddWithValue("@Cost", newItem.Cost);
+                    cmd.ExecuteNonQuery();
+                    RefreshTables();
+                }
+                catch (Exception e) {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
     }
     #endregion
 }

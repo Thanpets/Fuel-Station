@@ -30,26 +30,25 @@ namespace FuelStationProgram
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewForm));
             this.txtSqlPath = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
-            this.bar3 = new DevExpress.XtraBars.Bar();
-            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.crtlConnectToDB = new DevExpress.XtraBars.BarButtonItem();
             this.crtlLoadFromDB = new DevExpress.XtraBars.BarButtonItem();
             this.crtlExitApplication = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.crtlAddNewCustomer = new DevExpress.XtraBars.BarButtonItem();
-            this.crtlAddNewItem = new DevExpress.XtraBars.BarButtonItem();
             this.crtlAddNewEmployee = new DevExpress.XtraBars.BarButtonItem();
+            this.crtlAddNewItem = new DevExpress.XtraBars.BarButtonItem();
+            this.bar3 = new DevExpress.XtraBars.Bar();
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.label1 = new System.Windows.Forms.Label();
             this.crtlNewTransaction = new DevExpress.XtraEditors.SimpleButton();
             this.crtlCustomerCardNumber = new DevExpress.XtraEditors.TextEdit();
@@ -63,7 +62,9 @@ namespace FuelStationProgram
             // 
             // txtSqlPath
             // 
-            this.txtSqlPath.EditValue = resources.GetString("txtSqlPath.EditValue");
+            this.txtSqlPath.EditValue = "Data Source=DESKTOP-9DVRBJG;Initial Catalog=FuelStation;Integrated Security=True;" +
+    "Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=" +
+    "ReadWrite;MultiSubnetFailover=False";
             this.txtSqlPath.Location = new System.Drawing.Point(60, 529);
             this.txtSqlPath.Name = "txtSqlPath";
             this.txtSqlPath.Size = new System.Drawing.Size(390, 20);
@@ -92,7 +93,6 @@ namespace FuelStationProgram
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // barManager1
             // 
@@ -129,50 +129,6 @@ namespace FuelStationProgram
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
-            // 
-            // bar3
-            // 
-            this.bar3.BarName = "Status bar";
-            this.bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
-            this.bar3.DockCol = 0;
-            this.bar3.DockRow = 0;
-            this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
-            this.bar3.OptionsBar.AllowQuickCustomization = false;
-            this.bar3.OptionsBar.DrawDragBorder = false;
-            this.bar3.OptionsBar.UseWholeRow = true;
-            this.bar3.Text = "Status bar";
-            // 
-            // barDockControlTop
-            // 
-            this.barDockControlTop.CausesValidation = false;
-            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1054, 20);
-            // 
-            // barDockControlBottom
-            // 
-            this.barDockControlBottom.CausesValidation = false;
-            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 573);
-            this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1054, 20);
-            // 
-            // barDockControlLeft
-            // 
-            this.barDockControlLeft.CausesValidation = false;
-            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 20);
-            this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 553);
-            // 
-            // barDockControlRight
-            // 
-            this.barDockControlRight.CausesValidation = false;
-            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1054, 20);
-            this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 553);
             // 
             // barSubItem1
             // 
@@ -222,6 +178,13 @@ namespace FuelStationProgram
             this.crtlAddNewCustomer.Name = "crtlAddNewCustomer";
             this.crtlAddNewCustomer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.crtlAddNewCustomer_ItemClick);
             // 
+            // crtlAddNewEmployee
+            // 
+            this.crtlAddNewEmployee.Caption = "New Employee";
+            this.crtlAddNewEmployee.Id = 7;
+            this.crtlAddNewEmployee.Name = "crtlAddNewEmployee";
+            this.crtlAddNewEmployee.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.crtlAddNewEmployee_ItemClick);
+            // 
             // crtlAddNewItem
             // 
             this.crtlAddNewItem.Caption = "New item";
@@ -229,12 +192,49 @@ namespace FuelStationProgram
             this.crtlAddNewItem.Name = "crtlAddNewItem";
             this.crtlAddNewItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.crtlAddNewItem_ItemClick);
             // 
-            // crtlAddNewEmployee
+            // bar3
             // 
-            this.crtlAddNewEmployee.Caption = "New Employee";
-            this.crtlAddNewEmployee.Id = 7;
-            this.crtlAddNewEmployee.Name = "crtlAddNewEmployee";
-            this.crtlAddNewEmployee.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.crtlAddNewEmployee_ItemClick);
+            this.bar3.BarName = "Status bar";
+            this.bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
+            this.bar3.DockCol = 0;
+            this.bar3.DockRow = 0;
+            this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            this.bar3.OptionsBar.AllowQuickCustomization = false;
+            this.bar3.OptionsBar.DrawDragBorder = false;
+            this.bar3.OptionsBar.UseWholeRow = true;
+            this.bar3.Text = "Status bar";
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = this.barManager1;
+            this.barDockControlTop.Size = new System.Drawing.Size(1054, 20);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 573);
+            this.barDockControlBottom.Manager = this.barManager1;
+            this.barDockControlBottom.Size = new System.Drawing.Size(1054, 20);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 20);
+            this.barDockControlLeft.Manager = this.barManager1;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 553);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1054, 20);
+            this.barDockControlRight.Manager = this.barManager1;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 553);
             // 
             // label1
             // 
@@ -288,7 +288,7 @@ namespace FuelStationProgram
             this.Controls.Add(this.barDockControlTop);
             this.Name = "ViewForm";
             this.Text = "MainForm";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Load += new System.EventHandler(this.ViewForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtSqlPath.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
