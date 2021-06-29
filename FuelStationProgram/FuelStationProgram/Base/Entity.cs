@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FuelStationProgram.Base
 {
-    class Entity
+    public class Entity
     {
         public Guid ID { get; set; }
 

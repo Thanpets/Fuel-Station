@@ -11,7 +11,7 @@ CREATE TABLE [dbo].[TransactionLines](
     [ID] [uniqueidentifier] NOT NULL,
     [TransactionID] [uniqueidentifier] NOT NULL,
     [ItemID] [uniqueidentifier] NOT NULL,
-    Quantity [int] NOT NULL,
+    Quantity [decimal](18, 2) NOT NULL,
 	[ItemPrice] [decimal](18, 2) NOT NULL,
 	[Value] [decimal](18, 2) NOT NULL
 )

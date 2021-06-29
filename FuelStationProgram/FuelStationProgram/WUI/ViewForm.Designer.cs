@@ -65,6 +65,7 @@ namespace FuelStationProgram
             this.gridControlTransactions = new DevExpress.XtraGrid.GridControl();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabLedger = new DevExpress.XtraTab.XtraTabPage();
+            this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             ((System.ComponentModel.ISupportInitialize)(this.txtSqlPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -82,21 +83,23 @@ namespace FuelStationProgram
             this.tabTransactions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
+            this.tablePanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtSqlPath
             // 
-            this.txtSqlPath.EditValue = "Data Source=DESKTOP-9DVRBJG;Initial Catalog=FuelStation;Integrated Security=True;" +
+            this.txtSqlPath.EditValue = "Data Source=DESKTOP-JQOORR3;Initial Catalog=FuelStation;Integrated Security=True;" +
     "Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=" +
     "ReadWrite;MultiSubnetFailover=False";
-            this.txtSqlPath.Location = new System.Drawing.Point(60, 529);
+            this.txtSqlPath.Location = new System.Drawing.Point(652, 528);
             this.txtSqlPath.Name = "txtSqlPath";
             this.txtSqlPath.Size = new System.Drawing.Size(390, 20);
             this.txtSqlPath.TabIndex = 0;
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(10, 532);
+            this.labelControl1.Location = new System.Drawing.Point(602, 531);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(44, 13);
             this.labelControl1.TabIndex = 1;
@@ -271,26 +274,33 @@ namespace FuelStationProgram
             // 
             // crtlNewTransaction
             // 
-            this.crtlNewTransaction.Location = new System.Drawing.Point(58, 469);
+            this.tablePanel1.SetColumn(this.crtlNewTransaction, 1);
+            this.crtlNewTransaction.Location = new System.Drawing.Point(83, 82);
             this.crtlNewTransaction.Name = "crtlNewTransaction";
-            this.crtlNewTransaction.Size = new System.Drawing.Size(261, 41);
+            this.tablePanel1.SetRow(this.crtlNewTransaction, 1);
+            this.crtlNewTransaction.Size = new System.Drawing.Size(364, 45);
             this.crtlNewTransaction.TabIndex = 16;
             this.crtlNewTransaction.Text = "New Transaction...";
+            this.crtlNewTransaction.Click += new System.EventHandler(this.crtlNewTransaction_Click);
             // 
             // crtlCustomerCardNumber
             // 
-            this.crtlCustomerCardNumber.Location = new System.Drawing.Point(180, 431);
+            this.tablePanel1.SetColumn(this.crtlCustomerCardNumber, 1);
+            this.crtlCustomerCardNumber.Location = new System.Drawing.Point(83, 15);
             this.crtlCustomerCardNumber.MenuManager = this.barManager1;
             this.crtlCustomerCardNumber.Name = "crtlCustomerCardNumber";
-            this.crtlCustomerCardNumber.Size = new System.Drawing.Size(141, 20);
+            this.tablePanel1.SetRow(this.crtlCustomerCardNumber, 0);
+            this.crtlCustomerCardNumber.Size = new System.Drawing.Size(364, 20);
             this.crtlCustomerCardNumber.TabIndex = 17;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(55, 434);
+            this.tablePanel1.SetColumn(this.label2, 0);
+            this.label2.Location = new System.Drawing.Point(3, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 13);
+            this.tablePanel1.SetRow(this.label2, 0);
+            this.label2.Size = new System.Drawing.Size(74, 26);
             this.label2.TabIndex = 18;
             this.label2.Text = "Customer Card Number:";
             // 
@@ -390,15 +400,29 @@ namespace FuelStationProgram
             this.tabLedger.Size = new System.Drawing.Size(940, 327);
             this.tabLedger.Text = "Ledger";
             // 
+            // tablePanel1
+            // 
+            this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 10.69F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 49.31F)});
+            this.tablePanel1.Controls.Add(this.crtlNewTransaction);
+            this.tablePanel1.Controls.Add(this.label2);
+            this.tablePanel1.Controls.Add(this.crtlCustomerCardNumber);
+            this.tablePanel1.Location = new System.Drawing.Point(12, 403);
+            this.tablePanel1.Name = "tablePanel1";
+            this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 50F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
+            this.tablePanel1.Size = new System.Drawing.Size(450, 159);
+            this.tablePanel1.TabIndex = 34;
+            // 
             // ViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1054, 593);
+            this.Controls.Add(this.tablePanel1);
             this.Controls.Add(this.xtraTabPane);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.crtlCustomerCardNumber);
-            this.Controls.Add(this.crtlNewTransaction);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txtSqlPath);
@@ -426,6 +450,9 @@ namespace FuelStationProgram
             this.tabTransactions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
+            this.tablePanel1.ResumeLayout(false);
+            this.tablePanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,6 +495,7 @@ namespace FuelStationProgram
         private DevExpress.XtraGrid.GridControl gridControlTransactions;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraTab.XtraTabPage tabLedger;
+        private DevExpress.Utils.Layout.TablePanel tablePanel1;
     }
 }
 

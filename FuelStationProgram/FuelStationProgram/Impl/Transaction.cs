@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FuelStationProgram.Impl
 {
-    class Transaction:Entity
+    public class Transaction:Entity
     {
         public DateTime Date { get; set; }
         public Guid CustomerID { get; set; }

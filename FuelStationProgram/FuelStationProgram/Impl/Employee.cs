@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FuelStationProgram.Impl
 {
-    class Employee : Entity
+    public class Employee : Entity
     {
         public string Name { get; set; }
         public string Surname { get; set; }

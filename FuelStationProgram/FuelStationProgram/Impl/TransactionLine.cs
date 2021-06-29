@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace FuelStationProgram.Impl
 {
-    class TransactionLine : Entity
+    public class TransactionLine : Entity
     {
         public Guid TransactionID { get; set; }
         public Guid ItemID { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public decimal ItemPrice { get; set; }
         public decimal Value { get; set; }
+        public string ItemDescription { get; set; }
 
+        public ItemType ItemType { get; set; }
     }
 }

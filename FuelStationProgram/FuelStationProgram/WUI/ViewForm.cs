@@ -3,6 +3,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using FuelStationProgram.Impl;
 using FuelStationProgram.Properties;
+using FuelStationProgram.WUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,6 +91,47 @@ namespace FuelStationProgram
             DataEditForm form = new DataEditForm();
             form.EditObject = customer;
             form.Show();
+        }
+        private void crtlNewTransaction_Click(object sender, EventArgs e)
+        {
+            if (CustomerExists())
+            {
+
+                try
+                {
+                    Transaction transaction = new Transaction();
+
+                    TransactionForm form = new TransactionForm();
+
+
+                    form.Conn = Conn;
+                    form.Transaction = transaction;
+                    form.Show();
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+      
+            }
+            else
+            {
+                MessageBox.Show("Customer does not exist");
+            }
+
+            
+        }
+
+        private bool CustomerExists()
+        {
+            string customerCardNumber = crtlCustomerCardNumber.EditValue.ToString();
+            string querytest = $"SELECT * FROM[dbo].[Customers] WHERE[Customers].CardNumber = {customerCardNumber}";
+            SqlDataAdapter adapter = new SqlDataAdapter(querytest, Conn);
+            var customerDataTable = new DataSet();
+            adapter.Fill(customerDataTable);
+                return customerDataTable.Tables[0].Rows.Count > 0;
         }
         #endregion
         #region Methods
@@ -240,7 +282,6 @@ namespace FuelStationProgram
                 }
             }
         }
-
     }
     #endregion
 }

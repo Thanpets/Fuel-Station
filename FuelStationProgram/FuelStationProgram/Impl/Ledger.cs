@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FuelStationProgram.Impl
 {
-    class Ledger : Entity
+    public class Ledger : Entity
     {
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
