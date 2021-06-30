@@ -124,9 +124,9 @@ namespace FuelStationProgram {
         ///    [ID] [uniqueidentifier] NOT NULL,
         ///    [TransactionID] [uniqueidentifier] NOT NULL,
         ///    [ItemID] [uniqueidentifier] NOT NULL,
-        ///    Quantity [int] NOT NULL,
+        ///    Quantity [decimal](18, 2) NOT NULL,
         ///	[ItemPrice] [decimal](18, 2) NOT NULL,
-        ///	[Value] [decimal](18, 2) [rest of string was truncated]&quot;;.
+        ///	[Value] [deci [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CreateTransactions {
             get {
@@ -195,6 +195,48 @@ namespace FuelStationProgram {
         internal static string InsertItem {
             get {
                 return ResourceManager.GetString("InsertItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [dbo].[Transactions]
+        ///           ([ID]
+        ///           ,[Date]
+        ///         ,[CustomerID]
+        ///         ,[DiscountValue]
+        ///         ,[TotalValue])
+        ///     VALUES
+        ///           (@ID,
+        ///           @Date,
+        ///           @CustomerID,
+        ///           @DiscountValue,
+        ///           @TotalValue).
+        /// </summary>
+        internal static string InsertTransaction {
+            get {
+                return ResourceManager.GetString("InsertTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [dbo].[TransactionLines]
+        ///           ([ID]
+        ///         ,[TransactionID]
+        ///          ,[ItemID]
+        ///          ,[Quantity]
+        ///       ,[ItemPrice]
+        ///       ,[Value])
+        ///     VALUES
+        ///           (@ID,
+        ///           @TransactionID,
+        ///           @ItemID,
+        ///           @Quantity,
+        ///           @ItemPrice,
+        ///           @Value).
+        /// </summary>
+        internal static string InsertTransactionLine {
+            get {
+                return ResourceManager.GetString("InsertTransactionLine", resourceCulture);
             }
         }
         

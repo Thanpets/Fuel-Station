@@ -97,10 +97,38 @@ namespace FuelStationProgram.WUI
 
         private void crtlFinishTransaction_Click(object sender, EventArgs e)
         {
+            FinishTransaction();
+            Close();
+        }
 
+        private void FinishTransaction()
+        {
+            using (SqlCommand cmd = new SqlCommand(Resources.InsertTransaction, Conn))
+            {
+                cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = Transaction.ID;
+                cmd.Parameters.Add("@Date", SqlDbType.Date).Value = Transaction.Date;
+                cmd.Parameters.Add("@CustomerID", SqlDbType.UniqueIdentifier).Value = Transaction.CustomerID;
+                cmd.Parameters.Add("@DiscountValue", SqlDbType.Decimal).Value = Transaction.DiscountValue;
+                cmd.Parameters.Add("@TotalValue", SqlDbType.Decimal).Value = Transaction.TotalValue;
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
+            }
 
+            foreach (var line in TransactionLines)
+            {
+                using (SqlCommand cmd = new SqlCommand(Resources.InsertTransactionLine, Conn))
+                {
+                    cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = line.ID;
+                    cmd.Parameters.Add("@TransactionID", SqlDbType.UniqueIdentifier).Value = line.TransactionID;
+                    cmd.Parameters.Add("@ItemID", SqlDbType.UniqueIdentifier).Value = line.ItemID;
+                    cmd.Parameters.Add("@Quantity", SqlDbType.Decimal).Value = line.Quantity;
+                    cmd.Parameters.Add("@ItemPrice", SqlDbType.Decimal).Value = line.ItemPrice;
+                    cmd.Parameters.Add("@Value", SqlDbType.Decimal).Value = line.Value;
 
-
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         private void Calculations()
