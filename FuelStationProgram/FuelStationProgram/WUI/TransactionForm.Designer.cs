@@ -45,6 +45,7 @@ namespace FuelStationProgram.WUI
             this.crtlFinishTransaction = new DevExpress.XtraEditors.SimpleButton();
             this.crtlCancelTransaction = new DevExpress.XtraEditors.SimpleButton();
             this.crtlItemAmount = new DevExpress.XtraEditors.SpinEdit();
+            this.crtlDeleteItem = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.crtlItemList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtlTransactionLines)).BeginInit();
@@ -211,11 +212,21 @@ namespace FuelStationProgram.WUI
             this.crtlItemAmount.TabIndex = 7;
             this.crtlItemAmount.EditValueChanged += new System.EventHandler(this.crtlItemAmount_EditValueChanged);
             // 
+            // crtlDeleteItem
+            // 
+            this.crtlDeleteItem.Location = new System.Drawing.Point(876, 26);
+            this.crtlDeleteItem.Name = "crtlDeleteItem";
+            this.crtlDeleteItem.Size = new System.Drawing.Size(134, 32);
+            this.crtlDeleteItem.TabIndex = 8;
+            this.crtlDeleteItem.Text = "Remove item";
+            this.crtlDeleteItem.Click += new System.EventHandler(this.crtlDeleteItem_Click);
+            // 
             // TransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1101, 571);
+            this.Controls.Add(this.crtlDeleteItem);
             this.Controls.Add(this.crtlItemAmount);
             this.Controls.Add(this.crtlCancelTransaction);
             this.Controls.Add(this.crtlFinishTransaction);
@@ -252,5 +263,6 @@ namespace FuelStationProgram.WUI
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraEditors.SimpleButton crtlDeleteItem;
     }
 }
