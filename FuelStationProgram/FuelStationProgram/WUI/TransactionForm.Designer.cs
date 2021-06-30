@@ -38,12 +38,12 @@ namespace FuelStationProgram.WUI
             this.crtlTransactionLines = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.crtlAddItem = new DevExpress.XtraEditors.SimpleButton();
             this.crtlFinishTransaction = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.crtlCancelTransaction = new DevExpress.XtraEditors.SimpleButton();
             this.crtlItemAmount = new DevExpress.XtraEditors.SpinEdit();
             ((System.ComponentModel.ISupportInitialize)(this.crtlItemList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -120,10 +120,10 @@ namespace FuelStationProgram.WUI
             // gridView2
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn5,
+            this.gridColumn8,
             this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8});
+            this.gridColumn5,
+            this.gridColumn7});
             this.gridView2.GridControl = this.crtlTransactionLines;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.Editable = false;
@@ -134,15 +134,7 @@ namespace FuelStationProgram.WUI
             this.gridColumn8.FieldName = "ItemDescription";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 3;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "Price";
-            this.gridColumn5.FieldName = "ItemPrice";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 0;
+            this.gridColumn8.VisibleIndex = 0;
             // 
             // gridColumn6
             // 
@@ -152,13 +144,21 @@ namespace FuelStationProgram.WUI
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 1;
             // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "Price";
+            this.gridColumn5.FieldName = "ItemPrice";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 2;
+            // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "Value";
             this.gridColumn7.FieldName = "Value";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 2;
+            this.gridColumn7.VisibleIndex = 3;
             // 
             // crtlAddItem
             // 
@@ -171,21 +171,20 @@ namespace FuelStationProgram.WUI
             // 
             // crtlFinishTransaction
             // 
-            this.crtlFinishTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.crtlFinishTransaction.Location = new System.Drawing.Point(741, 488);
+            this.crtlFinishTransaction.Location = new System.Drawing.Point(650, 390);
             this.crtlFinishTransaction.Name = "crtlFinishTransaction";
             this.crtlFinishTransaction.Size = new System.Drawing.Size(178, 49);
             this.crtlFinishTransaction.TabIndex = 5;
             this.crtlFinishTransaction.Text = "Finish Transcation";
             // 
-            // simpleButton1
+            // crtlCancelTransaction
             // 
-            this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButton1.Location = new System.Drawing.Point(925, 488);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(178, 49);
-            this.simpleButton1.TabIndex = 6;
-            this.simpleButton1.Text = "Cancel Transaction";
+            this.crtlCancelTransaction.Location = new System.Drawing.Point(834, 390);
+            this.crtlCancelTransaction.Name = "crtlCancelTransaction";
+            this.crtlCancelTransaction.Size = new System.Drawing.Size(178, 49);
+            this.crtlCancelTransaction.TabIndex = 6;
+            this.crtlCancelTransaction.Text = "Cancel Transaction";
+            this.crtlCancelTransaction.Click += new System.EventHandler(this.crtlCancelTransaction_Click);
             // 
             // crtlItemAmount
             // 
@@ -218,7 +217,7 @@ namespace FuelStationProgram.WUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1101, 571);
             this.Controls.Add(this.crtlItemAmount);
-            this.Controls.Add(this.simpleButton1);
+            this.Controls.Add(this.crtlCancelTransaction);
             this.Controls.Add(this.crtlFinishTransaction);
             this.Controls.Add(this.crtlAddItem);
             this.Controls.Add(this.crtlTransactionLines);
@@ -243,7 +242,7 @@ namespace FuelStationProgram.WUI
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraEditors.SimpleButton crtlAddItem;
         private DevExpress.XtraEditors.SimpleButton crtlFinishTransaction;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton crtlCancelTransaction;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;

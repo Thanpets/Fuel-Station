@@ -39,14 +39,19 @@ namespace FuelStationProgram.WUI
 
         private void crtlAddItem_Click(object sender, EventArgs e)
         {
+            AddSelectedItemToTransactionViewList();
 
+        }
+
+        private void AddSelectedItemToTransactionViewList()
+        {
             var selectedItem = gridView1.GetSelectedRows();
             var currentRow = gridView1.GetRow(selectedItem[0]) as DataRowView;
             var currentItemId = (Guid)currentRow.Row["ID"];
             var currentItemPrice = (decimal)currentRow.Row["Price"];
             var currentItemType = (ItemType)Enum.Parse(typeof(ItemType), currentRow.Row["ItemType"].ToString());
             var currentItemDescription = currentRow.Row["Description"].ToString();
-            if (currentItemType == ItemType.Fuel && TransactionLines.Any(x => x.ItemType==ItemType.Fuel))
+            if (currentItemType == ItemType.Fuel && TransactionLines.Any(x => x.ItemType == ItemType.Fuel))
             {
                 MessageBox.Show("Only one fuel item is allowed");
                 return;
@@ -62,14 +67,17 @@ namespace FuelStationProgram.WUI
                 ItemType = currentItemType,
                 ItemDescription = currentItemDescription
 
-            }) ;
-            
-
+            });
         }
 
         private void crtlItemAmount_EditValueChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void crtlCancelTransaction_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -124,15 +124,7 @@ namespace FuelStationProgram
             
         }
 
-        private bool CustomerExists()
-        {
-            string customerCardNumber = crtlCustomerCardNumber.EditValue.ToString();
-            string querytest = $"SELECT * FROM[dbo].[Customers] WHERE[Customers].CardNumber = {customerCardNumber}";
-            SqlDataAdapter adapter = new SqlDataAdapter(querytest, Conn);
-            var customerDataTable = new DataSet();
-            adapter.Fill(customerDataTable);
-                return customerDataTable.Tables[0].Rows.Count > 0;
-        }
+        
         #endregion
         #region Methods
 
@@ -282,6 +274,17 @@ namespace FuelStationProgram
                 }
             }
         }
+        private bool CustomerExists()
+        {
+            string customerCardNumber = crtlCustomerCardNumber.EditValue.ToString();
+            string querytest = $"SELECT * FROM[dbo].[Customers] WHERE[Customers].CardNumber = {customerCardNumber}";
+            SqlDataAdapter adapter = new SqlDataAdapter(querytest, Conn);
+            var customerDataTable = new DataSet();
+            //more validation on empty input,and start without connection
+            adapter.Fill(customerDataTable);
+                return customerDataTable.Tables[0].Rows.Count > 0;
+        }
     }
+
     #endregion
 }
