@@ -94,7 +94,13 @@ namespace FuelStationProgram
         }
         private void crtlNewTransaction_Click(object sender, EventArgs e)
         {
-            if (CustomerExists())
+            if (Conn == null)
+            {
+                MessageBox.Show("Please start a connection before attemping a new transaction");
+                return;
+            }
+            var testCustomerExistance = CustomerExists();
+            if (testCustomerExistance)
             {
 
                 try
@@ -118,7 +124,7 @@ namespace FuelStationProgram
             }
             else
             {
-                MessageBox.Show("Customer does not exist");
+                MessageBox.Show("Customer does not exist,or card registration number field is empty");
             }
 
             
@@ -276,9 +282,14 @@ namespace FuelStationProgram
         }
         private bool CustomerExists()
         {
+            if (crtlCustomerCardNumber.EditValue == null || string.IsNullOrEmpty(crtlCustomerCardNumber.EditValue.ToString()))
+            {
+                return false;
+            }
             string customerCardNumber = crtlCustomerCardNumber.EditValue.ToString();
+            
             string querytest = $"SELECT * FROM[dbo].[Customers] WHERE[Customers].CardNumber = {customerCardNumber}";
-            SqlDataAdapter adapter = new SqlDataAdapter(querytest, Conn);
+            SqlDataAdapter adapter = new SqlDataAdapter(querytest, Conn);            
             var customerDataTable = new DataSet();
             //more validation on empty input,and start without connection
             adapter.Fill(customerDataTable);
