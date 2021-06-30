@@ -15,7 +15,7 @@ namespace FuelStationProgram.WUI
 {
     public partial class TransactionForm : Form
     {
-        
+
         public SqlConnection Conn { get; set; }
         public DataSet MasterData = new DataSet();
         public Transaction Transaction { get; set; }
@@ -34,7 +34,7 @@ namespace FuelStationProgram.WUI
             SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectItems, Conn);
             adapter.Fill(MasterData);
             crtlItemList.DataSource = MasterData.Tables[0];
-            
+
         }
 
         private void crtlAddItem_Click(object sender, EventArgs e)
@@ -43,11 +43,11 @@ namespace FuelStationProgram.WUI
 
         }
 
-        
+
 
         private void crtlItemAmount_EditValueChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void crtlCancelTransaction_Click(object sender, EventArgs e)
@@ -58,6 +58,7 @@ namespace FuelStationProgram.WUI
         private void crtlDeleteItem_Click(object sender, EventArgs e)
         {
             RemoveSelectedItem();
+            Calculations();
         }
         private void AddSelectedItemToTransactionViewList()
         {
@@ -84,12 +85,62 @@ namespace FuelStationProgram.WUI
                 ItemDescription = currentItemDescription
 
             });
+            Calculations();
         }
         private void RemoveSelectedItem()
         {
             var selectedItem = gridView2.GetSelectedRows();
             var currentRow = gridView2.GetRow(selectedItem[0]) as TransactionLine;
             TransactionLines.Remove(TransactionLines.FirstOrDefault(x => x.ItemID == currentRow.ItemID));
+
+        }
+
+        private void crtlFinishTransaction_Click(object sender, EventArgs e)
+        {
+
+
+
+
+        }
+
+        private void Calculations()
+        {
+            Transaction.TotalValue = 0;
+            Transaction.DiscountValue = 0;
+            bool discount = false;
+            decimal totalValue = 0;
+
+            foreach (var item in TransactionLines)
+            {
+                totalValue += item.Value;
+                if (item.ItemType == ItemType.Fuel && item.Value > 50)
+                {
+
+
+                    discount = true;
+
+                }
+            }
+            if (discount)
+            {
+                lblDiscountValue.Text = "10%";
+                decimal finalAmount = totalValue * (0.9m);
+                decimal discountAmount = totalValue - finalAmount;
+                Transaction.DiscountValue = discountAmount;
+                totalValue = finalAmount;
+
+
+            }
+            else
+            {
+                lblDiscountValue.Text = "0%";
+            }
+            lblDiscountAmount.Text = Transaction.DiscountValue.ToString("C");
+            lblTotalValue.Text = totalValue.ToString("C");
+            Transaction.TotalValue = totalValue;
+
+
+
         }
     }
 }

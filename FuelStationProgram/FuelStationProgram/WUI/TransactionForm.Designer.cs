@@ -46,6 +46,12 @@ namespace FuelStationProgram.WUI
             this.crtlCancelTransaction = new DevExpress.XtraEditors.SimpleButton();
             this.crtlItemAmount = new DevExpress.XtraEditors.SpinEdit();
             this.crtlDeleteItem = new DevExpress.XtraEditors.SimpleButton();
+            this.lblDiscountValue = new System.Windows.Forms.Label();
+            this.lblTotalValue = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.lblDiscountAmount = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.crtlItemList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtlTransactionLines)).BeginInit();
@@ -172,15 +178,16 @@ namespace FuelStationProgram.WUI
             // 
             // crtlFinishTransaction
             // 
-            this.crtlFinishTransaction.Location = new System.Drawing.Point(650, 390);
+            this.crtlFinishTransaction.Location = new System.Drawing.Point(595, 473);
             this.crtlFinishTransaction.Name = "crtlFinishTransaction";
             this.crtlFinishTransaction.Size = new System.Drawing.Size(178, 49);
             this.crtlFinishTransaction.TabIndex = 5;
             this.crtlFinishTransaction.Text = "Finish Transcation";
+            this.crtlFinishTransaction.Click += new System.EventHandler(this.crtlFinishTransaction_Click);
             // 
             // crtlCancelTransaction
             // 
-            this.crtlCancelTransaction.Location = new System.Drawing.Point(834, 390);
+            this.crtlCancelTransaction.Location = new System.Drawing.Point(811, 473);
             this.crtlCancelTransaction.Name = "crtlCancelTransaction";
             this.crtlCancelTransaction.Size = new System.Drawing.Size(178, 49);
             this.crtlCancelTransaction.TabIndex = 6;
@@ -221,11 +228,69 @@ namespace FuelStationProgram.WUI
             this.crtlDeleteItem.Text = "Remove item";
             this.crtlDeleteItem.Click += new System.EventHandler(this.crtlDeleteItem_Click);
             // 
+            // lblDiscountValue
+            // 
+            this.lblDiscountValue.AutoSize = true;
+            this.lblDiscountValue.Location = new System.Drawing.Point(777, 390);
+            this.lblDiscountValue.Name = "lblDiscountValue";
+            this.lblDiscountValue.Size = new System.Drawing.Size(24, 13);
+            this.lblDiscountValue.TabIndex = 9;
+            this.lblDiscountValue.Text = " 0%";
+            // 
+            // lblTotalValue
+            // 
+            this.lblTotalValue.AutoSize = true;
+            this.lblTotalValue.Location = new System.Drawing.Point(777, 442);
+            this.lblTotalValue.Name = "lblTotalValue";
+            this.lblTotalValue.Size = new System.Drawing.Size(22, 13);
+            this.lblTotalValue.TabIndex = 10;
+            this.lblTotalValue.Text = "$ 0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(674, 390);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Discount Value:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(692, 442);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Total Value:";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(671, 412);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(85, 13);
+            this.labelControl1.TabIndex = 13;
+            this.labelControl1.Text = "Discount Amount:";
+            // 
+            // lblDiscountAmount
+            // 
+            this.lblDiscountAmount.Location = new System.Drawing.Point(780, 412);
+            this.lblDiscountAmount.Name = "lblDiscountAmount";
+            this.lblDiscountAmount.Size = new System.Drawing.Size(15, 13);
+            this.lblDiscountAmount.TabIndex = 14;
+            this.lblDiscountAmount.Text = "$ 0";
+            // 
             // TransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1101, 571);
+            this.Controls.Add(this.lblDiscountAmount);
+            this.Controls.Add(this.labelControl1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblTotalValue);
+            this.Controls.Add(this.lblDiscountValue);
             this.Controls.Add(this.crtlDeleteItem);
             this.Controls.Add(this.crtlItemAmount);
             this.Controls.Add(this.crtlCancelTransaction);
@@ -242,6 +307,7 @@ namespace FuelStationProgram.WUI
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtlItemAmount.Properties)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -264,5 +330,11 @@ namespace FuelStationProgram.WUI
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.SimpleButton crtlDeleteItem;
+        private System.Windows.Forms.Label lblDiscountValue;
+        private System.Windows.Forms.Label lblTotalValue;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl lblDiscountAmount;
     }
 }
