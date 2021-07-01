@@ -52,6 +52,8 @@ namespace FuelStationProgram.WUI
             this.label3 = new System.Windows.Forms.Label();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.lblDiscountAmount = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.crtlItemList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtlTransactionLines)).BeginInit();
@@ -231,7 +233,7 @@ namespace FuelStationProgram.WUI
             // lblDiscountValue
             // 
             this.lblDiscountValue.AutoSize = true;
-            this.lblDiscountValue.Location = new System.Drawing.Point(777, 390);
+            this.lblDiscountValue.Location = new System.Drawing.Point(976, 387);
             this.lblDiscountValue.Name = "lblDiscountValue";
             this.lblDiscountValue.Size = new System.Drawing.Size(24, 13);
             this.lblDiscountValue.TabIndex = 9;
@@ -240,7 +242,7 @@ namespace FuelStationProgram.WUI
             // lblTotalValue
             // 
             this.lblTotalValue.AutoSize = true;
-            this.lblTotalValue.Location = new System.Drawing.Point(777, 442);
+            this.lblTotalValue.Location = new System.Drawing.Point(976, 439);
             this.lblTotalValue.Name = "lblTotalValue";
             this.lblTotalValue.Size = new System.Drawing.Size(22, 13);
             this.lblTotalValue.TabIndex = 10;
@@ -249,7 +251,7 @@ namespace FuelStationProgram.WUI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(674, 390);
+            this.label2.Location = new System.Drawing.Point(873, 387);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 11;
@@ -258,7 +260,7 @@ namespace FuelStationProgram.WUI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(692, 442);
+            this.label3.Location = new System.Drawing.Point(891, 439);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 12;
@@ -266,7 +268,7 @@ namespace FuelStationProgram.WUI
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(671, 412);
+            this.labelControl1.Location = new System.Drawing.Point(870, 409);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(85, 13);
             this.labelControl1.TabIndex = 13;
@@ -274,17 +276,40 @@ namespace FuelStationProgram.WUI
             // 
             // lblDiscountAmount
             // 
-            this.lblDiscountAmount.Location = new System.Drawing.Point(780, 412);
+            this.lblDiscountAmount.Location = new System.Drawing.Point(979, 409);
             this.lblDiscountAmount.Name = "lblDiscountAmount";
             this.lblDiscountAmount.Size = new System.Drawing.Size(15, 13);
             this.lblDiscountAmount.TabIndex = 14;
             this.lblDiscountAmount.Text = "$ 0";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
+            this.labelControl2.Location = new System.Drawing.Point(12, 35);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(126, 23);
+            this.labelControl2.TabIndex = 15;
+            this.labelControl2.Text = "Available Items";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Location = new System.Drawing.Point(526, 35);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(118, 23);
+            this.labelControl3.TabIndex = 16;
+            this.labelControl3.Text = "Shopping cart";
             // 
             // TransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1101, 571);
+            this.Controls.Add(this.labelControl3);
+            this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.lblDiscountAmount);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.label3);
@@ -336,5 +361,7 @@ namespace FuelStationProgram.WUI
         private System.Windows.Forms.Label label3;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl lblDiscountAmount;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
     }
 }
