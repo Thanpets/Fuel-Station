@@ -105,21 +105,17 @@ namespace FuelStationProgram
 
             
         }
-        private void ctrlEditCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            //if (Conn == null) {
-            //    return;
-            //}
-            //EditCustomer();
-        }
-        private void ctrlEditEmployee_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-
-        }
-        private void ctrlEditItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-
-        }
 
         private void btnSaveChanges_Click(object sender, EventArgs e) {
+            if (!MasterData.HasChanges()) {
+                MessageBox.Show("No changes were made.");
+                return;
+            }
             SaveChanges("Customers");
+            SaveChanges("Employees");
+            SaveChanges("Items");
+            SaveChanges("Transactions");
+            MasterData.AcceptChanges();
         }
 
         #endregion
@@ -290,24 +286,7 @@ namespace FuelStationProgram
                 }
             }
         }
-        //private void EditCustomer() {
-        //    DataRow dr = ((GridView)gridControlCustomers.MainView).GetFocusedDataRow();
-        //    Customer customer = new Customer {
-        //        Name = dr.ItemArray[1].ToString(),
-        //        Surname = dr.ItemArray[2].ToString(),
-        //        CardNumber = Convert.ToInt32(dr.ItemArray[3])
-        //    };
-        //    DataEditForm form = new DataEditForm();
-        //    form.EditObject = customer;
-        //    form.Show();
-        //    if (form.DialogResult == DialogResult.OK) {
-        //        dr["Name"] = customer.Name;
-        //        dr["Surname"] = customer.Surname;
-        //        dr["CardNumber"] = customer.CardNumber.ToString();
-                
-        //        RefreshTables();
-        //    }
-        //}
+
         private bool CustomerExists()
         {
             if (crtlCustomerCardNumber.EditValue == null || string.IsNullOrEmpty(crtlCustomerCardNumber.EditValue.ToString()))
@@ -326,7 +305,6 @@ namespace FuelStationProgram
 
         private void SaveChanges(string tableName) {
             if (!MasterData.HasChanges()) {
-                MessageBox.Show("No changes were made.");
                 return;
             }
 
@@ -356,6 +334,7 @@ namespace FuelStationProgram
                             ComposeQueryField(sqlSetLines, column.ColumnName, row[column.ColumnName]);
                         }
                     }
+
                 }
 
                 sqlSet = string.Join(",", sqlSetLines);
@@ -365,6 +344,16 @@ namespace FuelStationProgram
                     sqlCommands.Add(sql);
                 }
 
+                SqlCommand sqlCmd;
+                foreach (string cmdText in sqlCommands) {
+                    sqlCmd = new SqlCommand(cmdText, Conn);
+                    sqlCmd.ExecuteNonQuery();
+                }
+
+                string selectCmd = string.Format("SELECT * From {0}",tableName);
+                SqlDataAdapter adapter = new SqlDataAdapter(selectCmd, Conn);
+                OldMasterData.Tables[tableName].Clear();
+                adapter.Fill(OldMasterData, tableName);
             }
         }
 

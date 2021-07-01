@@ -44,10 +44,6 @@ namespace FuelStationProgram
             this.crtlAddNewCustomer = new DevExpress.XtraBars.BarButtonItem();
             this.crtlAddNewEmployee = new DevExpress.XtraBars.BarButtonItem();
             this.crtlAddNewItem = new DevExpress.XtraBars.BarButtonItem();
-            this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
-            this.ctrlEditCustomer = new DevExpress.XtraBars.BarButtonItem();
-            this.ctrlEditEmployee = new DevExpress.XtraBars.BarButtonItem();
-            this.ctrlEditItem = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -55,6 +51,7 @@ namespace FuelStationProgram
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
+            this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.label1 = new System.Windows.Forms.Label();
             this.crtlNewTransaction = new DevExpress.XtraEditors.SimpleButton();
             this.crtlCustomerCardNumber = new DevExpress.XtraEditors.TextEdit();
@@ -149,10 +146,7 @@ namespace FuelStationProgram
             this.crtlAddNewEmployee,
             this.barButtonItem1,
             this.barSubItem3,
-            this.barSubItem4,
-            this.ctrlEditCustomer,
-            this.ctrlEditEmployee,
-            this.ctrlEditItem});
+            this.barSubItem4});
             this.barManager1.MainMenu = this.bar2;
             this.barManager1.MaxItemId = 14;
             this.barManager1.StatusBar = this.bar3;
@@ -165,8 +159,7 @@ namespace FuelStationProgram
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem4)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2)});
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
@@ -233,37 +226,6 @@ namespace FuelStationProgram
             this.crtlAddNewItem.Name = "crtlAddNewItem";
             this.crtlAddNewItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.crtlAddNewItem_ItemClick);
             // 
-            // barSubItem4
-            // 
-            this.barSubItem4.Caption = "Edit";
-            this.barSubItem4.Id = 10;
-            this.barSubItem4.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.ctrlEditCustomer),
-            new DevExpress.XtraBars.LinkPersistInfo(this.ctrlEditEmployee),
-            new DevExpress.XtraBars.LinkPersistInfo(this.ctrlEditItem)});
-            this.barSubItem4.Name = "barSubItem4";
-            // 
-            // ctrlEditCustomer
-            // 
-            this.ctrlEditCustomer.Caption = "Customer";
-            this.ctrlEditCustomer.Id = 11;
-            this.ctrlEditCustomer.Name = "ctrlEditCustomer";
-            this.ctrlEditCustomer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ctrlEditCustomer_ItemClick);
-            // 
-            // ctrlEditEmployee
-            // 
-            this.ctrlEditEmployee.Caption = "Employee";
-            this.ctrlEditEmployee.Id = 12;
-            this.ctrlEditEmployee.Name = "ctrlEditEmployee";
-            this.ctrlEditEmployee.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ctrlEditEmployee_ItemClick);
-            // 
-            // ctrlEditItem
-            // 
-            this.ctrlEditItem.Caption = "Item";
-            this.ctrlEditItem.Id = 13;
-            this.ctrlEditItem.Name = "ctrlEditItem";
-            this.ctrlEditItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ctrlEditItem_ItemClick);
-            // 
             // bar3
             // 
             this.bar3.BarName = "Status bar";
@@ -319,6 +281,12 @@ namespace FuelStationProgram
             this.barSubItem3.Caption = "barSubItem3";
             this.barSubItem3.Id = 9;
             this.barSubItem3.Name = "barSubItem3";
+            // 
+            // barSubItem4
+            // 
+            this.barSubItem4.Caption = "Edit";
+            this.barSubItem4.Id = 10;
+            this.barSubItem4.Name = "barSubItem4";
             // 
             // label1
             // 
@@ -583,9 +551,7 @@ namespace FuelStationProgram
         private DevExpress.XtraEditors.SimpleButton btnSaveChanges;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarSubItem barSubItem4;
-        private DevExpress.XtraBars.BarButtonItem ctrlEditCustomer;
-        private DevExpress.XtraBars.BarButtonItem ctrlEditEmployee;
-        private DevExpress.XtraBars.BarButtonItem ctrlEditItem;
+
         private DevExpress.XtraBars.BarSubItem barSubItem3;
         private DevExpress.XtraEditors.SimpleButton btnDelete;
     }
