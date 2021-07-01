@@ -7,10 +7,12 @@ using FuelStationProgram.WUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -552,8 +554,54 @@ namespace FuelStationProgram
 
         }
 
+        private void btnCalculate_Click(object sender, EventArgs e) {
+            DateTime dateStart = Convert.ToDateTime(dateEdit1.EditValue);
+            DateTime dateEnd = Convert.ToDateTime(dateEdit2.EditValue);
+            if (dateEdit1.EditValue == null || dateEdit2.EditValue == null || dateStart>dateEnd) {
+                MessageBox.Show("Please enter valid dates.");
+                return;
+            }
+
+            List<Employee> employees = new List<Employee>();
+            List<Transaction> transactions = new List<Transaction>();
+            List<Items> items = new List<Items>();
+            List<TransactionLine> transactionLines = new List<TransactionLine>();
+
+            foreach (DataRow dr in OldMasterData.Tables["Employees"].Rows) {
+                employees.Add(DatarowToObject.ToObject<Employee>(dr));
+            }
+            foreach (DataRow dr in OldMasterData.Tables["Transactions"].Rows) {
+                transactions.Add(DatarowToObject.ToObject<Transaction>(dr));
+            }
+            foreach (DataRow dr in OldMasterData.Tables["Items"].Rows) {
+                items.Add(DatarowToObject.ToObject<Items>(dr));
+            }
+
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * From TransactionLines", Conn);
+            OldMasterData.Tables["TransactionLines"]?.Clear();
+            adapter.Fill(OldMasterData, "TransactionLines");
+            foreach (DataRow dr in OldMasterData.Tables["TransactionLines"].Rows) {
+                transactionLines.Add(DatarowToObject.ToObject<TransactionLine>(dr));
+            }
+
+            Ledger ledger = new Ledger();
+            ledger.DateFrom = dateStart;
+            ledger.DateTo = dateEnd;
+            ledger.Calculate(transactions, employees, items, transactionLines);
+
+            lblIncome.Visible = true;
+            lblIncomeValue.Visible = true;
+            lblIncomeValue.Text = ledger.Income.ToString("#.##");
+            lblExpenses.Visible = true;
+            lblExpensesValue.Visible = true;
+            lblExpensesValue.Text = ledger.Expenses.ToString("#.##");
+            lblTotal.Visible = true;
+            lblTotalValue.Visible = true;
+            lblTotalValue.Text = ledger.Total.ToString("#.##");
+        }
 
     }
+
 
     #endregion
 }

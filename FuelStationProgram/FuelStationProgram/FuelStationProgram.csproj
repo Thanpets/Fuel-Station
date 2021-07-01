@@ -67,6 +67,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FuelStationDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Impl\DatarowToObject.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

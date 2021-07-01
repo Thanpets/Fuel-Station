@@ -1,0 +1,59 @@
+﻿using FuelStationProgram.Base;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FuelStationProgram.Impl {
+    public static class DatarowToObject {
+
+
+        public static T ToObject<T>(this DataRow dataRow)
+            where T : new() {
+            T item = new T();
+
+            foreach (DataColumn column in dataRow.Table.Columns) {
+                PropertyInfo property = GetProperty(typeof(T), column.ColumnName);
+
+                if (property != null && dataRow[column] != DBNull.Value && dataRow[column].ToString() != "NULL") {
+                    property.SetValue(item, ChangeType(dataRow[column], property.PropertyType), null);
+                }
+            }
+
+            return item;
+        }
+
+        private static PropertyInfo GetProperty(Type type, string attributeName) {
+            PropertyInfo property = type.GetProperty(attributeName);
+
+            if (property != null) {
+                return property;
+            }
+
+            return type.GetProperties()
+                 .Where(p => p.IsDefined(typeof(DisplayAttribute), false) && p.GetCustomAttributes(typeof(DisplayAttribute), false).Cast<DisplayAttribute>().Single().Name == attributeName)
+                 .FirstOrDefault();
+        }
+
+        public static object ChangeType(object value, Type type) {
+            if (type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>))) {
+                if (value == null) {
+                    return null;
+                }
+
+                return Convert.ChangeType(value, Nullable.GetUnderlyingType(type));
+            }
+
+            if (type != typeof(ItemType)) {
+            return Convert.ChangeType(value, type);
+            }
+            else {
+                return (ItemType)Enum.Parse(typeof(ItemType), value.ToString());
+            }
+        }
+    }
+}

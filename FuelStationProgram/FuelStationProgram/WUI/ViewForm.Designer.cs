@@ -66,20 +66,27 @@ namespace FuelStationProgram
             this.gridControlItems = new DevExpress.XtraGrid.GridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabTransactions = new DevExpress.XtraTab.XtraTabPage();
+            this.gridControlTransactions = new DevExpress.XtraGrid.GridControl();
+            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabLedger = new DevExpress.XtraTab.XtraTabPage();
+            this.lblEndDate = new DevExpress.XtraEditors.LabelControl();
+            this.lblStartDate = new DevExpress.XtraEditors.LabelControl();
+            this.btnCalculate = new DevExpress.XtraEditors.SimpleButton();
+            this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
+            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.btnSaveChanges = new DevExpress.XtraEditors.SimpleButton();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.sidePanel1 = new DevExpress.XtraEditors.SidePanel();
-            this.gridControlTransactions = new DevExpress.XtraGrid.GridControl();
-            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
-            this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
-            this.btnCalculate = new DevExpress.XtraEditors.SimpleButton();
-            this.lblStartDate = new DevExpress.XtraEditors.LabelControl();
-            this.lblEndDate = new DevExpress.XtraEditors.LabelControl();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.lblIncome = new DevExpress.XtraEditors.LabelControl();
+            this.lblExpenses = new DevExpress.XtraEditors.LabelControl();
+            this.lblTotal = new DevExpress.XtraEditors.LabelControl();
+            this.lblTotalValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblExpensesValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblIncomeValue = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSqlPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCustomers)).BeginInit();
@@ -96,17 +103,19 @@ namespace FuelStationProgram
             ((System.ComponentModel.ISupportInitialize)(this.gridControlItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             this.tabTransactions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlTransactions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             this.tabLedger.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
-            this.tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlTransactions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
+            this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager1
@@ -429,6 +438,25 @@ namespace FuelStationProgram
             this.tabTransactions.Size = new System.Drawing.Size(749, 327);
             this.tabTransactions.Text = "Transactions";
             // 
+            // gridControlTransactions
+            // 
+            this.gridControlTransactions.Location = new System.Drawing.Point(-1, 0);
+            this.gridControlTransactions.MainView = this.gridView4;
+            this.gridControlTransactions.MenuManager = this.barManager1;
+            this.gridControlTransactions.Name = "gridControlTransactions";
+            this.gridControlTransactions.Size = new System.Drawing.Size(751, 180);
+            this.gridControlTransactions.TabIndex = 53;
+            this.gridControlTransactions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView4});
+            this.gridControlTransactions.Visible = false;
+            // 
+            // gridView4
+            // 
+            this.gridView4.GridControl = this.gridControlTransactions;
+            this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsBehavior.Editable = false;
+            this.gridView4.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView4_SelectionChanged);
+            // 
             // gridControl1
             // 
             this.gridControl1.Location = new System.Drawing.Point(2, 186);
@@ -449,6 +477,7 @@ namespace FuelStationProgram
             // 
             // tabLedger
             // 
+            this.tabLedger.Controls.Add(this.panelControl1);
             this.tabLedger.Controls.Add(this.lblEndDate);
             this.tabLedger.Controls.Add(this.lblStartDate);
             this.tabLedger.Controls.Add(this.btnCalculate);
@@ -457,6 +486,62 @@ namespace FuelStationProgram
             this.tabLedger.Name = "tabLedger";
             this.tabLedger.Size = new System.Drawing.Size(749, 327);
             this.tabLedger.Text = "Ledger";
+            // 
+            // lblEndDate
+            // 
+            this.lblEndDate.Location = new System.Drawing.Point(38, 92);
+            this.lblEndDate.Name = "lblEndDate";
+            this.lblEndDate.Size = new System.Drawing.Size(44, 13);
+            this.lblEndDate.TabIndex = 4;
+            this.lblEndDate.Text = "End Date";
+            this.lblEndDate.Visible = false;
+            // 
+            // lblStartDate
+            // 
+            this.lblStartDate.Location = new System.Drawing.Point(38, 47);
+            this.lblStartDate.Name = "lblStartDate";
+            this.lblStartDate.Size = new System.Drawing.Size(50, 13);
+            this.lblStartDate.TabIndex = 3;
+            this.lblStartDate.Text = "Start Date";
+            this.lblStartDate.Visible = false;
+            // 
+            // btnCalculate
+            // 
+            this.btnCalculate.Location = new System.Drawing.Point(132, 155);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(75, 23);
+            this.btnCalculate.TabIndex = 2;
+            this.btnCalculate.Text = "Calculate";
+            this.btnCalculate.Visible = false;
+            this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
+            // 
+            // dateEdit2
+            // 
+            this.dateEdit2.EditValue = null;
+            this.dateEdit2.Location = new System.Drawing.Point(107, 89);
+            this.dateEdit2.MenuManager = this.barManager1;
+            this.dateEdit2.Name = "dateEdit2";
+            this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit2.Size = new System.Drawing.Size(100, 20);
+            this.dateEdit2.TabIndex = 1;
+            this.dateEdit2.Visible = false;
+            // 
+            // dateEdit1
+            // 
+            this.dateEdit1.EditValue = null;
+            this.dateEdit1.Location = new System.Drawing.Point(107, 44);
+            this.dateEdit1.MenuManager = this.barManager1;
+            this.dateEdit1.Name = "dateEdit1";
+            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit1.Size = new System.Drawing.Size(100, 20);
+            this.dateEdit1.TabIndex = 0;
+            this.dateEdit1.Visible = false;
             // 
             // tablePanel1
             // 
@@ -508,79 +593,84 @@ namespace FuelStationProgram
             this.sidePanel1.TabIndex = 5;
             this.sidePanel1.Text = "sidePanel1";
             // 
-            // gridControlTransactions
+            // panelControl1
             // 
-            this.gridControlTransactions.Location = new System.Drawing.Point(-1, 0);
-            this.gridControlTransactions.MainView = this.gridView4;
-            this.gridControlTransactions.MenuManager = this.barManager1;
-            this.gridControlTransactions.Name = "gridControlTransactions";
-            this.gridControlTransactions.Size = new System.Drawing.Size(751, 180);
-            this.gridControlTransactions.TabIndex = 53;
-            this.gridControlTransactions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView4});
-            this.gridControlTransactions.Visible = false;
+            this.panelControl1.Controls.Add(this.lblTotalValue);
+            this.panelControl1.Controls.Add(this.lblExpensesValue);
+            this.panelControl1.Controls.Add(this.lblIncomeValue);
+            this.panelControl1.Controls.Add(this.lblTotal);
+            this.panelControl1.Controls.Add(this.lblExpenses);
+            this.panelControl1.Controls.Add(this.lblIncome);
+            this.panelControl1.Location = new System.Drawing.Point(367, 47);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(224, 192);
+            this.panelControl1.TabIndex = 5;
             // 
-            // gridView4
+            // lblIncome
             // 
-            this.gridView4.GridControl = this.gridControlTransactions;
-            this.gridView4.Name = "gridView4";
-            this.gridView4.OptionsBehavior.Editable = false;
-            this.gridView4.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView4_SelectionChanged);
+            this.lblIncome.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblIncome.Appearance.Options.UseFont = true;
+            this.lblIncome.Location = new System.Drawing.Point(19, 26);
+            this.lblIncome.Name = "lblIncome";
+            this.lblIncome.Size = new System.Drawing.Size(60, 18);
+            this.lblIncome.TabIndex = 0;
+            this.lblIncome.Text = "Income:";
+            this.lblIncome.Visible = false;
             // 
-            // dateEdit1
+            // lblExpenses
             // 
-            this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(107, 44);
-            this.dateEdit1.MenuManager = this.barManager1;
-            this.dateEdit1.Name = "dateEdit1";
-            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Size = new System.Drawing.Size(100, 20);
-            this.dateEdit1.TabIndex = 0;
-            this.dateEdit1.Visible = false;
+            this.lblExpenses.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblExpenses.Appearance.Options.UseFont = true;
+            this.lblExpenses.Location = new System.Drawing.Point(19, 81);
+            this.lblExpenses.Name = "lblExpenses";
+            this.lblExpenses.Size = new System.Drawing.Size(83, 18);
+            this.lblExpenses.TabIndex = 1;
+            this.lblExpenses.Text = "Expenses: ";
+            this.lblExpenses.Visible = false;
             // 
-            // dateEdit2
+            // lblTotal
             // 
-            this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(107, 89);
-            this.dateEdit2.MenuManager = this.barManager1;
-            this.dateEdit2.Name = "dateEdit2";
-            this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Size = new System.Drawing.Size(100, 20);
-            this.dateEdit2.TabIndex = 1;
-            this.dateEdit2.Visible = false;
+            this.lblTotal.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblTotal.Appearance.Options.UseFont = true;
+            this.lblTotal.Location = new System.Drawing.Point(19, 142);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(48, 18);
+            this.lblTotal.TabIndex = 2;
+            this.lblTotal.Text = "Total: ";
+            this.lblTotal.Visible = false;
             // 
-            // btnCalculate
+            // lblTotalValue
             // 
-            this.btnCalculate.Location = new System.Drawing.Point(132, 155);
-            this.btnCalculate.Name = "btnCalculate";
-            this.btnCalculate.Size = new System.Drawing.Size(75, 23);
-            this.btnCalculate.TabIndex = 2;
-            this.btnCalculate.Text = "Calculate";
-            this.btnCalculate.Visible = false;
+            this.lblTotalValue.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblTotalValue.Appearance.Options.UseFont = true;
+            this.lblTotalValue.Location = new System.Drawing.Point(117, 142);
+            this.lblTotalValue.Name = "lblTotalValue";
+            this.lblTotalValue.Size = new System.Drawing.Size(48, 18);
+            this.lblTotalValue.TabIndex = 5;
+            this.lblTotalValue.Text = "Total: ";
+            this.lblTotalValue.Visible = false;
             // 
-            // lblStartDate
+            // lblExpensesValue
             // 
-            this.lblStartDate.Location = new System.Drawing.Point(38, 47);
-            this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(50, 13);
-            this.lblStartDate.TabIndex = 3;
-            this.lblStartDate.Text = "Start Date";
-            this.lblStartDate.Visible = false;
+            this.lblExpensesValue.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblExpensesValue.Appearance.Options.UseFont = true;
+            this.lblExpensesValue.Location = new System.Drawing.Point(117, 81);
+            this.lblExpensesValue.Name = "lblExpensesValue";
+            this.lblExpensesValue.Size = new System.Drawing.Size(83, 18);
+            this.lblExpensesValue.TabIndex = 4;
+            this.lblExpensesValue.Text = "Expenses: ";
+            this.lblExpensesValue.Visible = false;
             // 
-            // lblEndDate
+            // lblIncomeValue
             // 
-            this.lblEndDate.Location = new System.Drawing.Point(38, 92);
-            this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(44, 13);
-            this.lblEndDate.TabIndex = 4;
-            this.lblEndDate.Text = "End Date";
-            this.lblEndDate.Visible = false;
+            this.lblIncomeValue.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblIncomeValue.Appearance.Options.UseFont = true;
+            this.lblIncomeValue.Location = new System.Drawing.Point(117, 26);
+            this.lblIncomeValue.Name = "lblIncomeValue";
+            this.lblIncomeValue.Size = new System.Drawing.Size(60, 18);
+            this.lblIncomeValue.TabIndex = 3;
+            this.lblIncomeValue.Text = "Income:";
+            this.lblIncomeValue.Visible = false;
             // 
             // ViewForm
             // 
@@ -617,19 +707,22 @@ namespace FuelStationProgram
             ((System.ComponentModel.ISupportInitialize)(this.gridControlItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             this.tabTransactions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlTransactions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             this.tabLedger.ResumeLayout(false);
             this.tabLedger.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlTransactions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -688,6 +781,13 @@ namespace FuelStationProgram
         private DevExpress.XtraEditors.SimpleButton btnCalculate;
         private DevExpress.XtraEditors.DateEdit dateEdit2;
         private DevExpress.XtraEditors.DateEdit dateEdit1;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.LabelControl lblTotalValue;
+        private DevExpress.XtraEditors.LabelControl lblExpensesValue;
+        private DevExpress.XtraEditors.LabelControl lblIncomeValue;
+        private DevExpress.XtraEditors.LabelControl lblTotal;
+        private DevExpress.XtraEditors.LabelControl lblExpenses;
+        private DevExpress.XtraEditors.LabelControl lblIncome;
     }
 }
 
