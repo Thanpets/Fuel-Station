@@ -90,8 +90,16 @@ namespace FuelStationProgram.WUI
         private void RemoveSelectedItem()
         {
             var selectedItem = gridView2.GetSelectedRows();
-            var currentRow = gridView2.GetRow(selectedItem[0]) as TransactionLine;
-            TransactionLines.Remove(TransactionLines.FirstOrDefault(x => x.ItemID == currentRow.ItemID));
+            if (TransactionLines.Count < 1)
+            {
+                return;
+                
+            }
+            else
+            {
+                var currentRow = gridView2.GetRow(selectedItem[0]) as TransactionLine;
+                TransactionLines.Remove(TransactionLines.FirstOrDefault(x => x.ItemID == currentRow.ItemID));
+            }
 
         }
 
