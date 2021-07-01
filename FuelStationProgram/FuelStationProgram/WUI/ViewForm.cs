@@ -500,8 +500,8 @@ namespace FuelStationProgram
             gridView6.Columns["ID"].Visible = false;
             gridView6.Columns["TransactionID"].Visible = false;
             gridView6.Columns["ItemID"].Visible = false;
-            gridView6.Columns["Quantity"].Visible = false;
-            gridView6.Columns["Value"].Visible = false;
+            gridView6.Columns["Quantity"].Visible = true;
+            gridView6.Columns["Value"].Visible = true;
             gridView6.Columns["ItemDescription"].VisibleIndex = 0;
         }
 
