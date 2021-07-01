@@ -188,9 +188,14 @@ namespace FuelStationProgram
                 MasterData.Tables["Transactions"].Columns.Add(newCol);
 
                 foreach (DataRow row in MasterData.Tables["Transactions"].Rows) {
-                    string expression = string.Format("ID = '{0}'",row["CustomerID"].ToString());
-                    DataRow customerRow = MasterData.Tables["Customers"].Select(expression)[0];
-                    row["CustomerName"] = string.Format("{0} {1}",customerRow["Name"],customerRow["Surname"]);
+                    try {
+                        string expression = string.Format("ID = '{0}'", row["CustomerID"].ToString());
+                        DataRow customerRow = MasterData.Tables["Customers"].Select(expression)[0];
+                        row["CustomerName"] = string.Format("{0} {1}", customerRow["Name"], customerRow["Surname"]);
+                    }
+                    catch (Exception e) {
+                        //customer was deleted
+                    }
                 }
 
 
