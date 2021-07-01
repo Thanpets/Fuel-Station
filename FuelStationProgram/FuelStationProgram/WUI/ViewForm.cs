@@ -123,6 +123,7 @@ namespace FuelStationProgram
             SaveChanges("Employees");
             SaveChanges("Items");
             MasterData.AcceptChanges();
+            RefreshTables();
 
         }
 
@@ -252,7 +253,11 @@ namespace FuelStationProgram
                 gridControl1.Visible = true;
                 gridView6.OptionsView.ShowGroupPanel = false;
 
-                
+                dateEdit1.Visible = true;
+                dateEdit2.Visible = true;
+                lblEndDate.Visible = true;
+                lblStartDate.Visible = true;
+                btnCalculate.Visible = true;
 
             }
             catch (Exception ex) {
@@ -266,6 +271,9 @@ namespace FuelStationProgram
             gridControlEmployees.Refresh();
             gridControlItems.Refresh();
             gridControlTransactions.Refresh();
+
+            LoadTransactionLinesToGrid();
+            gridControl1.Refresh();
         }
 
         private void AddCustomer() {
