@@ -15,7 +15,7 @@ namespace FuelStationProgram.WUI
 {
     public partial class TransactionForm : Form
     {
-        
+
         public SqlConnection Conn { get; set; }
         public DataSet MasterData = new DataSet();
         public Transaction Transaction { get; set; }
@@ -34,7 +34,7 @@ namespace FuelStationProgram.WUI
             SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectItems, Conn);
             adapter.Fill(MasterData);
             crtlItemList.DataSource = MasterData.Tables[0];
-            
+
         }
 
         private void crtlAddItem_Click(object sender, EventArgs e)
@@ -43,11 +43,11 @@ namespace FuelStationProgram.WUI
 
         }
 
-        
+
 
         private void crtlItemAmount_EditValueChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void crtlCancelTransaction_Click(object sender, EventArgs e)
@@ -58,6 +58,7 @@ namespace FuelStationProgram.WUI
         private void crtlDeleteItem_Click(object sender, EventArgs e)
         {
             RemoveSelectedItem();
+            Calculations();
         }
         private void AddSelectedItemToTransactionViewList()
         {
@@ -84,12 +85,90 @@ namespace FuelStationProgram.WUI
                 ItemDescription = currentItemDescription
 
             });
+            Calculations();
         }
         private void RemoveSelectedItem()
         {
             var selectedItem = gridView2.GetSelectedRows();
             var currentRow = gridView2.GetRow(selectedItem[0]) as TransactionLine;
             TransactionLines.Remove(TransactionLines.FirstOrDefault(x => x.ItemID == currentRow.ItemID));
+
+        }
+
+        private void crtlFinishTransaction_Click(object sender, EventArgs e)
+        {
+            FinishTransaction();
+            Close();
+        }
+
+        private void FinishTransaction()
+        {
+            using (SqlCommand cmd = new SqlCommand(Resources.InsertTransaction, Conn))
+            {
+                cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = Transaction.ID;
+                cmd.Parameters.Add("@Date", SqlDbType.Date).Value = Transaction.Date;
+                cmd.Parameters.Add("@CustomerID", SqlDbType.UniqueIdentifier).Value = Transaction.CustomerID;
+                cmd.Parameters.Add("@DiscountValue", SqlDbType.Decimal).Value = Transaction.DiscountValue;
+                cmd.Parameters.Add("@TotalValue", SqlDbType.Decimal).Value = Transaction.TotalValue;
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
+            }
+
+            foreach (var line in TransactionLines)
+            {
+                using (SqlCommand cmd = new SqlCommand(Resources.InsertTransactionLine, Conn))
+                {
+                    cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = line.ID;
+                    cmd.Parameters.Add("@TransactionID", SqlDbType.UniqueIdentifier).Value = line.TransactionID;
+                    cmd.Parameters.Add("@ItemID", SqlDbType.UniqueIdentifier).Value = line.ItemID;
+                    cmd.Parameters.Add("@Quantity", SqlDbType.Decimal).Value = line.Quantity;
+                    cmd.Parameters.Add("@ItemPrice", SqlDbType.Decimal).Value = line.ItemPrice;
+                    cmd.Parameters.Add("@Value", SqlDbType.Decimal).Value = line.Value;
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void Calculations()
+        {
+            Transaction.TotalValue = 0;
+            Transaction.DiscountValue = 0;
+            bool discount = false;
+            decimal totalValue = 0;
+
+            foreach (var item in TransactionLines)
+            {
+                totalValue += item.Value;
+                if (item.ItemType == ItemType.Fuel && item.Value > 50)
+                {
+
+
+                    discount = true;
+
+                }
+            }
+            if (discount)
+            {
+                lblDiscountValue.Text = "10%";
+                decimal finalAmount = totalValue * (0.9m);
+                decimal discountAmount = totalValue - finalAmount;
+                Transaction.DiscountValue = discountAmount;
+                totalValue = finalAmount;
+
+
+            }
+            else
+            {
+                lblDiscountValue.Text = "0%";
+            }
+            lblDiscountAmount.Text = Transaction.DiscountValue.ToString("C");
+            lblTotalValue.Text = totalValue.ToString("C");
+            Transaction.TotalValue = totalValue;
+
+
+
         }
     }
 }

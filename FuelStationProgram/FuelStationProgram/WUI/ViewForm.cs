@@ -75,14 +75,16 @@ namespace FuelStationProgram
                 MessageBox.Show("Please start a connection before attemping a new transaction");
                 return;
             }
-            var testCustomerExistance = CustomerExists();
+            var testCustomerExistance = CustomerExists(out var customerID);
             if (testCustomerExistance)
             {
 
                 try
                 {
                     Transaction transaction = new Transaction();
-
+                    transaction.Date = DateTime.Now;
+                    transaction.CustomerID = customerID;
+                    
                     TransactionForm form = new TransactionForm();
 
 
@@ -289,9 +291,9 @@ namespace FuelStationProgram
                 }
             }
         }
-
-        private bool CustomerExists()
+        private bool CustomerExists(out Guid customerId)
         {
+            customerId = Guid.Empty;
             if (crtlCustomerCardNumber.EditValue == null || string.IsNullOrEmpty(crtlCustomerCardNumber.EditValue.ToString()))
             {
                 return false;
@@ -301,9 +303,18 @@ namespace FuelStationProgram
             string querytest = $"SELECT * FROM[dbo].[Customers] WHERE[Customers].CardNumber = {customerCardNumber}";
             SqlDataAdapter adapter = new SqlDataAdapter(querytest, Conn);            
             var customerDataTable = new DataSet();
-            //more validation on empty input,and start without connection
+            
             adapter.Fill(customerDataTable);
-                return customerDataTable.Tables[0].Rows.Count > 0;
+            if (customerDataTable.Tables[0].Rows.Count > 0)
+            {
+                customerId = (Guid)customerDataTable.Tables[0].Rows[0]["ID"];
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+                
         }
 
         private void SaveChanges(string tableName) {

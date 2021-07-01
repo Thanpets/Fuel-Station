@@ -135,6 +135,8 @@
     <Content Include="Queries\CreateCustomers.sql" />
     <Content Include="Queries\CreateEmployees.sql" />
     <Content Include="Queries\CreateTransactions.sql" />
+    <Content Include="Queries\InsertTransactionLine.sql" />
+    <Content Include="Queries\InsertTransaction.sql" />
     <Content Include="Queries\SelectEmployees.sql" />
     <Content Include="Queries\SelectTransactions.sql" />
     <Content Include="Queries\SelectItems.sql" />
