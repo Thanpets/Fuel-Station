@@ -31,6 +31,7 @@ namespace FuelStationProgram
         #region Events
 
         private void ViewForm_Load(object sender, EventArgs e) {
+
             gridControlCustomers.Visible = false;
             gridControlEmployees.Visible = false;
             gridControlItems.Visible = false;
@@ -128,6 +129,14 @@ namespace FuelStationProgram
         private void btnDelete_Click(object sender, EventArgs e) {
             DeleteEntity();
         }
+        private void gridView4_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e) {
+            LoadTransactionLinesToGrid();
+
+        }
+
+        
+
+
 
         #endregion
 
@@ -154,7 +163,9 @@ namespace FuelStationProgram
             BindingSource bindingSourceCustomers = new BindingSource();
             BindingSource bindingSourceEmployees = new BindingSource();
             BindingSource bindingSourceItems = new BindingSource();
+
             BindingSource bindingSourceTransactions = new BindingSource();
+
             try {
                 SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectCustomers, Conn);
                 MasterData.Clear();
@@ -178,6 +189,7 @@ namespace FuelStationProgram
                 adapter = new SqlDataAdapter(Resources.SelectTransactions, Conn);
                 adapter.Fill(MasterData, "Transactions");
                 adapter.Fill(OldMasterData, "Transactions");
+
 
                 DataColumn newCol = new DataColumn();
                 newCol.DataType = typeof(string);
@@ -232,11 +244,15 @@ namespace FuelStationProgram
                 gridControlTransactions.Visible = true;
                 gridView4.Columns["ID"].Visible = false;
                 gridView4.Columns["CustomerID"].Visible = false;
-                gridView4.BeginDataUpdate();
-                gridView4.ClearSorting();
-                gridView4.Columns["Date"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                gridView4.EndDataUpdate();
+                //gridView4.BeginDataUpdate();
+                //gridView4.ClearSorting();
+                //gridView4.Columns["Date"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                //gridView4.EndDataUpdate();
 
+                gridControl1.Visible = true;
+                gridView6.OptionsView.ShowGroupPanel = false;
+
+                
 
             }
             catch (Exception ex) {
@@ -478,6 +494,53 @@ namespace FuelStationProgram
             SqlDataAdapter adapter = new SqlDataAdapter(selectCmd, Conn);
             OldMasterData.Tables[tableName].Clear();
             adapter.Fill(OldMasterData, tableName);
+
+        }
+        private void gridTransactionLineLayout() {
+            gridView6.Columns["ID"].Visible = false;
+            gridView6.Columns["TransactionID"].Visible = false;
+            gridView6.Columns["ItemID"].Visible = false;
+            gridView6.Columns["Quantity"].Visible = false;
+            gridView6.Columns["Value"].Visible = false;
+            gridView6.Columns["ItemDescription"].VisibleIndex = 0;
+        }
+
+        private void LoadTransactionLinesToGrid() {
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * from transactionlines", Conn);
+
+            MasterData.Tables["TransactionLines"]?.Clear();
+            
+            DataColumn newCol = new DataColumn();
+            newCol.DataType = typeof(string);
+            newCol.AllowDBNull = true;
+            newCol.ColumnName = "ItemDescription";
+            newCol.Caption = "Items Description";
+
+            adapter.Fill(MasterData, "TransactionLines");
+
+            if (!MasterData.Tables["TransactionLines"].Columns.Contains("ItemDescription")) {
+                MasterData.Tables["TransactionLines"].Columns.Add(newCol);
+            }
+            
+            DataRow transactionRow = gridView4.GetFocusedDataRow();
+            try {
+                string expression = string.Format("TransactionID = '{0}'", transactionRow["ID"]);
+                DataRow[] transactionLines = MasterData.Tables["TransactionLines"].Select(expression);
+                DataTable dt = transactionLines.CopyToDataTable();
+
+                foreach (DataRow row in dt.Rows) {
+                    expression = string.Format("ID = '{0}'", row["ItemID"].ToString());
+                    DataRow itemRow = MasterData.Tables["Items"].Select(expression)[0];
+                    row["ItemDescription"] = string.Format("{0}", itemRow["Description"]);
+                }
+
+                gridControl1.DataSource = dt;
+
+                gridTransactionLineLayout();
+            }
+            catch (Exception ex) {
+
+            }
 
         }
 
