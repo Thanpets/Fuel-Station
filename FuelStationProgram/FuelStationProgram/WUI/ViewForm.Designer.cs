@@ -30,6 +30,7 @@ namespace FuelStationProgram
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             this.txtSqlPath = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.gridControlCustomers = new DevExpress.XtraGrid.GridControl();
@@ -415,6 +416,9 @@ namespace FuelStationProgram
             // 
             // gridControlTransactions
             // 
+            gridLevelNode1.RelationName = "Level1";
+            this.gridControlTransactions.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1});
             this.gridControlTransactions.Location = new System.Drawing.Point(0, 0);
             this.gridControlTransactions.MainView = this.gridView4;
             this.gridControlTransactions.MenuManager = this.barManager1;

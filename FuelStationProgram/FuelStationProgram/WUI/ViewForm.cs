@@ -113,6 +113,7 @@ namespace FuelStationProgram
                 MessageBox.Show("No changes were made.");
                 return;
             }
+            //check item valid enum change
             SaveChanges("Customers");
             SaveChanges("Employees");
             SaveChanges("Items");
@@ -334,8 +335,9 @@ namespace FuelStationProgram
                 List<string> sqlSetLines = new List<string>();
                 List<string> sqlWhereLines = new List<string>();
                 string selectExpression = string.Format("ID = '{0}'", row[primaryKey].ToString());
+                try {
+                    DataRow rowOld = OldMasterData.Tables[tableName].Select(selectExpression)[0];
                 
-                DataRow rowOld = OldMasterData.Tables[tableName].Select(selectExpression)[0];
                 foreach (DataColumn column in MasterData.Tables[tableName].Columns) {
 
                     if (column.ColumnName == primaryKey) {
@@ -349,6 +351,11 @@ namespace FuelStationProgram
                         }
                     }
 
+                }
+                }
+                catch (Exception e) {
+                    MessageBox.Show("Select non extistent ID");
+                    return;
                 }
 
                 sqlSet = string.Join(",", sqlSetLines);
