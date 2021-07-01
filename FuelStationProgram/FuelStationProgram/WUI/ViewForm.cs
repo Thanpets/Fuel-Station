@@ -117,6 +117,9 @@ namespace FuelStationProgram
                 return;
             }
             //check item valid enum change
+            SaveAdds("Customers");
+            SaveAdds("Employees");
+            SaveAdds("Items");
             SaveDeletes("Customers");
             SaveDeletes("Employees");
             SaveDeletes("Items");
@@ -285,12 +288,13 @@ namespace FuelStationProgram
             form.ShowDialog();
             if (form.DialogResult == DialogResult.OK) {
                 try {
-                    SqlCommand cmd = new SqlCommand(Resources.InsertCustomer, Conn);
-                    cmd.Parameters.AddWithValue("@ID", newCustomer.ID);
-                    cmd.Parameters.AddWithValue("@Name", newCustomer.Name);
-                    cmd.Parameters.AddWithValue("@Surname", newCustomer.Surname);
-                    cmd.Parameters.AddWithValue("@CardNumber", newCustomer.CardNumber);
-                    cmd.ExecuteNonQuery();
+                    DataRow newRow = MasterData.Tables["Customers"].NewRow();
+                    newRow["ID"] = newCustomer.ID;
+                    newRow["Name"] = newCustomer.Name;
+                    newRow["Surname"] = newCustomer.Surname;
+                    newRow["CardNumber"] = newCustomer.CardNumber;
+
+                    MasterData.Tables["Customers"].Rows.Add(newRow);
                     RefreshTables();
                 }
                 catch (Exception e) {
@@ -306,14 +310,15 @@ namespace FuelStationProgram
             form.ShowDialog();
             if (form.DialogResult == DialogResult.OK) {
                 try {
-                    SqlCommand cmd = new SqlCommand(Resources.InsertEmployee, Conn);
-                    cmd.Parameters.AddWithValue("@ID", newEmployee.ID);
-                    cmd.Parameters.AddWithValue("@Name", newEmployee.Name);
-                    cmd.Parameters.AddWithValue("@Surname", newEmployee.Surname);
-                    cmd.Parameters.AddWithValue("@DateStart", newEmployee.DateStart.Date);
-                    cmd.Parameters.AddWithValue("@DateEnd", newEmployee.DateEnd.Date);
-                    cmd.Parameters.AddWithValue("@Salary", newEmployee.Salary);
-                    cmd.ExecuteNonQuery();
+                    DataRow newRow = MasterData.Tables["Employees"].NewRow();
+                    newRow["ID"] = newEmployee.ID;
+                    newRow["Name"] = newEmployee.Name;
+                    newRow["Surname"] = newEmployee.Surname;
+                    newRow["DateStart"] = newEmployee.DateStart.Date;
+                    newRow["DateEnd"] = newEmployee.DateEnd.Date;
+                    newRow["Salary"] = newEmployee.Salary;
+
+                    MasterData.Tables["Employees"].Rows.Add(newRow);
                     RefreshTables();
                 }
                 catch (Exception e) {
@@ -329,14 +334,15 @@ namespace FuelStationProgram
             form.ShowDialog();
             if (form.DialogResult == DialogResult.OK) {
                 try {
-                    SqlCommand cmd = new SqlCommand(Resources.InsertItem, Conn);
-                    cmd.Parameters.AddWithValue("@ID", newItem.ID);
-                    cmd.Parameters.AddWithValue("@Code", newItem.Code);
-                    cmd.Parameters.AddWithValue("@Description", newItem.Description);
-                    cmd.Parameters.AddWithValue("@ItemType", newItem.ItemType.ToString());
-                    cmd.Parameters.AddWithValue("@Price", newItem.Price);
-                    cmd.Parameters.AddWithValue("@Cost", newItem.Cost);
-                    cmd.ExecuteNonQuery();
+                    DataRow newRow = MasterData.Tables["Items"].NewRow();
+                    newRow["ID"] = newItem.ID;
+                    newRow["Code"] = newItem.Code;
+                    newRow["Description"] = newItem.Description;
+                    newRow["ItemType"] = newItem.ItemType.ToString();
+                    newRow["Price"] = newItem.Price;
+                    newRow["Cost"] = newItem.Cost;
+
+                    MasterData.Tables["Items"].Rows.Add(newRow);
                     RefreshTables();
                 }
                 catch (Exception e) {
@@ -504,6 +510,63 @@ namespace FuelStationProgram
             SqlDataAdapter adapter = new SqlDataAdapter(selectCmd, Conn);
             OldMasterData.Tables[tableName].Clear();
             adapter.Fill(OldMasterData, tableName);
+
+        }
+        private void SaveAdds(string tableName) {
+
+            foreach (DataRow row in MasterData.Tables[tableName].Rows) {
+
+                try {
+                    string expression = string.Format("ID = '{0}'", row["ID"]);
+                    DataRow addedRow = OldMasterData.Tables[tableName].Select(expression)[0];
+                }
+                catch (Exception ex) {
+                    if (ex is DeletedRowInaccessibleException) {
+                        continue;
+                    }
+                    else {
+                        SqlCommand cmd;
+                        switch (tableName) {
+                            case "Customers":
+                                cmd = new SqlCommand(Resources.InsertCustomer, Conn);
+                                cmd.Parameters.AddWithValue("@ID", row["ID"]);
+                                cmd.Parameters.AddWithValue("@Name", row["Name"]);
+                                cmd.Parameters.AddWithValue("@Surname", row["Surname"]);
+                                cmd.Parameters.AddWithValue("@CardNumber", row["CardNumber"]);
+                                cmd.ExecuteNonQuery();
+                                break;
+                            case "Employees":
+                                cmd = new SqlCommand(Resources.InsertEmployee, Conn);
+                                cmd.Parameters.AddWithValue("@ID", row["ID"]);
+                                cmd.Parameters.AddWithValue("@Name", row["Name"]);
+                                cmd.Parameters.AddWithValue("@Surname", row["Surname"]);
+                                cmd.Parameters.AddWithValue("@DateStart", row["DateStart"]);
+                                cmd.Parameters.AddWithValue("@DateEnd", row["DateEnd"]);
+                                cmd.Parameters.AddWithValue("@Salary", row["Salary"]);
+                                cmd.ExecuteNonQuery();
+                                break;
+                            case "Items":
+                                cmd = new SqlCommand(Resources.InsertItem, Conn);
+                                cmd.Parameters.AddWithValue("@ID", row["ID"]);
+                                cmd.Parameters.AddWithValue("@Code", row["Code"]);
+                                cmd.Parameters.AddWithValue("@Description", row["Description"]);
+                                cmd.Parameters.AddWithValue("@ItemType", row["ItemType"]);
+                                cmd.Parameters.AddWithValue("@Price", row["Price"]);
+                                cmd.Parameters.AddWithValue("@Cost", row["Cost"]);
+                                cmd.ExecuteNonQuery();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+
+            string selectCmd = string.Format("SELECT * From {0}", tableName);
+            SqlDataAdapter adapter = new SqlDataAdapter(selectCmd, Conn);
+            OldMasterData.Tables[tableName].Clear();
+            adapter.Fill(OldMasterData, tableName);
+
 
         }
         private void gridTransactionLineLayout() {
