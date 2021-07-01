@@ -97,8 +97,15 @@ namespace FuelStationProgram.WUI
 
         private void crtlFinishTransaction_Click(object sender, EventArgs e)
         {
-            FinishTransaction();
-            Close();
+            if (TransactionLines.Count>0)
+            {
+                FinishTransaction();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Cannot complete an empty transaction");
+            }         
         }
 
         private void FinishTransaction()
