@@ -114,10 +114,15 @@ namespace FuelStationProgram
                 return;
             }
             //check item valid enum change
+            SaveDeletes("Customers");
+            SaveDeletes("Employees");
+            SaveDeletes("Items");
+            SaveDeletes("Transactions");
             SaveChanges("Customers");
             SaveChanges("Employees");
             SaveChanges("Items");
             MasterData.AcceptChanges();
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e) {
@@ -173,6 +178,22 @@ namespace FuelStationProgram
                 adapter = new SqlDataAdapter(Resources.SelectTransactions, Conn);
                 adapter.Fill(MasterData, "Transactions");
                 adapter.Fill(OldMasterData, "Transactions");
+
+                DataColumn newCol = new DataColumn();
+                newCol.DataType = typeof(string);
+
+                newCol.AllowDBNull = true;
+                newCol.ColumnName = "CustomerName";
+                newCol.Caption = "Customer Name";
+                MasterData.Tables["Transactions"].Columns.Add(newCol);
+
+                foreach (DataRow row in MasterData.Tables["Transactions"].Rows) {
+                    string expression = string.Format("ID = '{0}'",row["CustomerID"].ToString());
+                    DataRow customerRow = MasterData.Tables["Customers"].Select(expression)[0];
+                    row["CustomerName"] = string.Format("{0} {1}",customerRow["Name"],customerRow["Surname"]);
+                }
+
+
                 bindingSourceTransactions.DataSource = MasterData.Tables["Transactions"];
                 gridControlTransactions.DataSource = bindingSourceTransactions;
 
@@ -334,8 +355,8 @@ namespace FuelStationProgram
 
                 List<string> sqlSetLines = new List<string>();
                 List<string> sqlWhereLines = new List<string>();
-                string selectExpression = string.Format("ID = '{0}'", row[primaryKey].ToString());
                 try {
+                    string selectExpression = string.Format("ID = '{0}'", row[primaryKey].ToString());
                     DataRow rowOld = OldMasterData.Tables[tableName].Select(selectExpression)[0];
                 
                 foreach (DataColumn column in MasterData.Tables[tableName].Columns) {
@@ -354,8 +375,6 @@ namespace FuelStationProgram
                 }
                 }
                 catch (Exception e) {
-                    MessageBox.Show("Select non extistent ID");
-                    return;
                 }
 
                 sqlSet = string.Join(",", sqlSetLines);
@@ -415,28 +434,46 @@ namespace FuelStationProgram
 
         private void DeleteEntity() {
             string selectedTab = xtraTabPane.SelectedTabPage.Text;
-            DataRow dr;
             switch (selectedTab) {
                 case "Customers":
-                    dr = gridView1.GetFocusedDataRow();
-                    //dr["ID"];
+                    gridView1.DeleteRow(gridView1.FocusedRowHandle);    
                     break;
                 case "Employees":
-                    dr = gridView2.GetFocusedDataRow();
-                    //dr["ID"];
+                    gridView2.DeleteRow(gridView2.FocusedRowHandle);
                     break;
                 case "Items":
-                    dr = gridView3.GetFocusedDataRow();
-                    //dr["ID"];
+                    gridView3.DeleteRow(gridView3.FocusedRowHandle);
                     break;
                 case "Transactions":
-                    dr = gridView4.GetFocusedDataRow();
-                    //dr["ID"];
+                    gridView4.DeleteRow(gridView4.FocusedRowHandle);
                     break;
                 default:
                     break;
             }
             RefreshTables();
+        }
+        private void SaveDeletes(string tableName) {
+                    
+            foreach (DataRow row in OldMasterData.Tables[tableName].Rows) {
+                
+                try {
+                    string expression = string.Format("ID = '{0}'", row["ID"]);
+                    DataRow deletedRow = MasterData.Tables[tableName].Select(expression)[0];
+                }
+                catch (Exception ex) {
+                    SqlCommand sqlCmd;
+                    string cmdText = string.Format("DELETE FROM {0} WHERE ID = '{1}'",tableName,row["ID"]);
+                    sqlCmd = new SqlCommand(cmdText, Conn);
+                    sqlCmd.ExecuteNonQuery();
+
+                }
+            }
+
+            string selectCmd = string.Format("SELECT * From {0}", tableName);
+            SqlDataAdapter adapter = new SqlDataAdapter(selectCmd, Conn);
+            OldMasterData.Tables[tableName].Clear();
+            adapter.Fill(OldMasterData, tableName);
+
         }
 
 
