@@ -48,9 +48,6 @@ namespace FuelStationProgram
         private void crtlConnectToDB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             SqlConnect();
-        }
-        private void crtlLoadFromDB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
             SqlLoadTables();
         }
         private void crtlAddNewCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
@@ -267,6 +264,7 @@ namespace FuelStationProgram
                 lblEndDate.Visible = true;
                 lblStartDate.Visible = true;
                 btnCalculate.Visible = true;
+                panelControl1.Visible = true;
 
             }
             catch (Exception ex) {

@@ -34,7 +34,6 @@ namespace FuelStationProgram
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.crtlConnectToDB = new DevExpress.XtraBars.BarButtonItem();
-            this.crtlLoadFromDB = new DevExpress.XtraBars.BarButtonItem();
             this.crtlExitApplication = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.crtlAddNewCustomer = new DevExpress.XtraBars.BarButtonItem();
@@ -45,6 +44,7 @@ namespace FuelStationProgram
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.crtlLoadFromDB = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
             this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
@@ -71,6 +71,13 @@ namespace FuelStationProgram
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabLedger = new DevExpress.XtraTab.XtraTabPage();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.lblTotalValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblExpensesValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblIncomeValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblTotal = new DevExpress.XtraEditors.LabelControl();
+            this.lblExpenses = new DevExpress.XtraEditors.LabelControl();
+            this.lblIncome = new DevExpress.XtraEditors.LabelControl();
             this.lblEndDate = new DevExpress.XtraEditors.LabelControl();
             this.lblStartDate = new DevExpress.XtraEditors.LabelControl();
             this.btnCalculate = new DevExpress.XtraEditors.SimpleButton();
@@ -80,13 +87,6 @@ namespace FuelStationProgram
             this.btnSaveChanges = new DevExpress.XtraEditors.SimpleButton();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.sidePanel1 = new DevExpress.XtraEditors.SidePanel();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.lblIncome = new DevExpress.XtraEditors.LabelControl();
-            this.lblExpenses = new DevExpress.XtraEditors.LabelControl();
-            this.lblTotal = new DevExpress.XtraEditors.LabelControl();
-            this.lblTotalValue = new DevExpress.XtraEditors.LabelControl();
-            this.lblExpensesValue = new DevExpress.XtraEditors.LabelControl();
-            this.lblIncomeValue = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSqlPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCustomers)).BeginInit();
@@ -108,14 +108,14 @@ namespace FuelStationProgram
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             this.tabLedger.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager1
@@ -163,23 +163,15 @@ namespace FuelStationProgram
             this.barSubItem1.Id = 0;
             this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.crtlConnectToDB),
-            new DevExpress.XtraBars.LinkPersistInfo(this.crtlLoadFromDB),
             new DevExpress.XtraBars.LinkPersistInfo(this.crtlExitApplication)});
             this.barSubItem1.Name = "barSubItem1";
             // 
             // crtlConnectToDB
             // 
-            this.crtlConnectToDB.Caption = "Connect";
+            this.crtlConnectToDB.Caption = "Load Data";
             this.crtlConnectToDB.Id = 1;
             this.crtlConnectToDB.Name = "crtlConnectToDB";
             this.crtlConnectToDB.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.crtlConnectToDB_ItemClick);
-            // 
-            // crtlLoadFromDB
-            // 
-            this.crtlLoadFromDB.Caption = "Load Data";
-            this.crtlLoadFromDB.Id = 2;
-            this.crtlLoadFromDB.Name = "crtlLoadFromDB";
-            this.crtlLoadFromDB.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.crtlLoadFromDB_ItemClick);
             // 
             // crtlExitApplication
             // 
@@ -262,6 +254,12 @@ namespace FuelStationProgram
             this.barDockControlRight.Location = new System.Drawing.Point(1054, 20);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 553);
+            // 
+            // crtlLoadFromDB
+            // 
+            this.crtlLoadFromDB.Caption = "Load Data";
+            this.crtlLoadFromDB.Id = 2;
+            this.crtlLoadFromDB.Name = "crtlLoadFromDB";
             // 
             // barButtonItem1
             // 
@@ -459,11 +457,11 @@ namespace FuelStationProgram
             // 
             // gridControl1
             // 
-            this.gridControl1.Location = new System.Drawing.Point(2, 186);
+            this.gridControl1.Location = new System.Drawing.Point(-1, 179);
             this.gridControl1.MainView = this.gridView6;
             this.gridControl1.MenuManager = this.barManager1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(748, 138);
+            this.gridControl1.Size = new System.Drawing.Size(751, 150);
             this.gridControl1.TabIndex = 52;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView6});
@@ -486,6 +484,86 @@ namespace FuelStationProgram
             this.tabLedger.Name = "tabLedger";
             this.tabLedger.Size = new System.Drawing.Size(749, 327);
             this.tabLedger.Text = "Ledger";
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.lblTotalValue);
+            this.panelControl1.Controls.Add(this.lblExpensesValue);
+            this.panelControl1.Controls.Add(this.lblIncomeValue);
+            this.panelControl1.Controls.Add(this.lblTotal);
+            this.panelControl1.Controls.Add(this.lblExpenses);
+            this.panelControl1.Controls.Add(this.lblIncome);
+            this.panelControl1.Location = new System.Drawing.Point(367, 47);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(224, 192);
+            this.panelControl1.TabIndex = 5;
+            this.panelControl1.Visible = false;
+            // 
+            // lblTotalValue
+            // 
+            this.lblTotalValue.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblTotalValue.Appearance.Options.UseFont = true;
+            this.lblTotalValue.Location = new System.Drawing.Point(117, 142);
+            this.lblTotalValue.Name = "lblTotalValue";
+            this.lblTotalValue.Size = new System.Drawing.Size(48, 18);
+            this.lblTotalValue.TabIndex = 5;
+            this.lblTotalValue.Text = "Total: ";
+            this.lblTotalValue.Visible = false;
+            // 
+            // lblExpensesValue
+            // 
+            this.lblExpensesValue.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblExpensesValue.Appearance.Options.UseFont = true;
+            this.lblExpensesValue.Location = new System.Drawing.Point(117, 81);
+            this.lblExpensesValue.Name = "lblExpensesValue";
+            this.lblExpensesValue.Size = new System.Drawing.Size(83, 18);
+            this.lblExpensesValue.TabIndex = 4;
+            this.lblExpensesValue.Text = "Expenses: ";
+            this.lblExpensesValue.Visible = false;
+            // 
+            // lblIncomeValue
+            // 
+            this.lblIncomeValue.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblIncomeValue.Appearance.Options.UseFont = true;
+            this.lblIncomeValue.Location = new System.Drawing.Point(117, 26);
+            this.lblIncomeValue.Name = "lblIncomeValue";
+            this.lblIncomeValue.Size = new System.Drawing.Size(60, 18);
+            this.lblIncomeValue.TabIndex = 3;
+            this.lblIncomeValue.Text = "Income:";
+            this.lblIncomeValue.Visible = false;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblTotal.Appearance.Options.UseFont = true;
+            this.lblTotal.Location = new System.Drawing.Point(19, 142);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(48, 18);
+            this.lblTotal.TabIndex = 2;
+            this.lblTotal.Text = "Total: ";
+            this.lblTotal.Visible = false;
+            // 
+            // lblExpenses
+            // 
+            this.lblExpenses.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblExpenses.Appearance.Options.UseFont = true;
+            this.lblExpenses.Location = new System.Drawing.Point(19, 81);
+            this.lblExpenses.Name = "lblExpenses";
+            this.lblExpenses.Size = new System.Drawing.Size(83, 18);
+            this.lblExpenses.TabIndex = 1;
+            this.lblExpenses.Text = "Expenses: ";
+            this.lblExpenses.Visible = false;
+            // 
+            // lblIncome
+            // 
+            this.lblIncome.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblIncome.Appearance.Options.UseFont = true;
+            this.lblIncome.Location = new System.Drawing.Point(19, 26);
+            this.lblIncome.Name = "lblIncome";
+            this.lblIncome.Size = new System.Drawing.Size(60, 18);
+            this.lblIncome.TabIndex = 0;
+            this.lblIncome.Text = "Income:";
+            this.lblIncome.Visible = false;
             // 
             // lblEndDate
             // 
@@ -593,85 +671,6 @@ namespace FuelStationProgram
             this.sidePanel1.TabIndex = 5;
             this.sidePanel1.Text = "sidePanel1";
             // 
-            // panelControl1
-            // 
-            this.panelControl1.Controls.Add(this.lblTotalValue);
-            this.panelControl1.Controls.Add(this.lblExpensesValue);
-            this.panelControl1.Controls.Add(this.lblIncomeValue);
-            this.panelControl1.Controls.Add(this.lblTotal);
-            this.panelControl1.Controls.Add(this.lblExpenses);
-            this.panelControl1.Controls.Add(this.lblIncome);
-            this.panelControl1.Location = new System.Drawing.Point(367, 47);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(224, 192);
-            this.panelControl1.TabIndex = 5;
-            // 
-            // lblIncome
-            // 
-            this.lblIncome.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblIncome.Appearance.Options.UseFont = true;
-            this.lblIncome.Location = new System.Drawing.Point(19, 26);
-            this.lblIncome.Name = "lblIncome";
-            this.lblIncome.Size = new System.Drawing.Size(60, 18);
-            this.lblIncome.TabIndex = 0;
-            this.lblIncome.Text = "Income:";
-            this.lblIncome.Visible = false;
-            // 
-            // lblExpenses
-            // 
-            this.lblExpenses.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblExpenses.Appearance.Options.UseFont = true;
-            this.lblExpenses.Location = new System.Drawing.Point(19, 81);
-            this.lblExpenses.Name = "lblExpenses";
-            this.lblExpenses.Size = new System.Drawing.Size(83, 18);
-            this.lblExpenses.TabIndex = 1;
-            this.lblExpenses.Text = "Expenses: ";
-            this.lblExpenses.Visible = false;
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblTotal.Appearance.Options.UseFont = true;
-            this.lblTotal.Location = new System.Drawing.Point(19, 142);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(48, 18);
-            this.lblTotal.TabIndex = 2;
-            this.lblTotal.Text = "Total: ";
-            this.lblTotal.Visible = false;
-            // 
-            // lblTotalValue
-            // 
-            this.lblTotalValue.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblTotalValue.Appearance.Options.UseFont = true;
-            this.lblTotalValue.Location = new System.Drawing.Point(117, 142);
-            this.lblTotalValue.Name = "lblTotalValue";
-            this.lblTotalValue.Size = new System.Drawing.Size(48, 18);
-            this.lblTotalValue.TabIndex = 5;
-            this.lblTotalValue.Text = "Total: ";
-            this.lblTotalValue.Visible = false;
-            // 
-            // lblExpensesValue
-            // 
-            this.lblExpensesValue.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblExpensesValue.Appearance.Options.UseFont = true;
-            this.lblExpensesValue.Location = new System.Drawing.Point(117, 81);
-            this.lblExpensesValue.Name = "lblExpensesValue";
-            this.lblExpensesValue.Size = new System.Drawing.Size(83, 18);
-            this.lblExpensesValue.TabIndex = 4;
-            this.lblExpensesValue.Text = "Expenses: ";
-            this.lblExpensesValue.Visible = false;
-            // 
-            // lblIncomeValue
-            // 
-            this.lblIncomeValue.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblIncomeValue.Appearance.Options.UseFont = true;
-            this.lblIncomeValue.Location = new System.Drawing.Point(117, 26);
-            this.lblIncomeValue.Name = "lblIncomeValue";
-            this.lblIncomeValue.Size = new System.Drawing.Size(60, 18);
-            this.lblIncomeValue.TabIndex = 3;
-            this.lblIncomeValue.Text = "Income:";
-            this.lblIncomeValue.Visible = false;
-            // 
             // ViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -689,7 +688,7 @@ namespace FuelStationProgram
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "ViewForm";
-            this.Text = "MainForm";
+            this.Text = "Fuel Station App";
             this.Load += new System.EventHandler(this.ViewForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSqlPath.Properties)).EndInit();
@@ -713,6 +712,9 @@ namespace FuelStationProgram
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             this.tabLedger.ResumeLayout(false);
             this.tabLedger.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
@@ -720,9 +722,6 @@ namespace FuelStationProgram
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            this.panelControl1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
