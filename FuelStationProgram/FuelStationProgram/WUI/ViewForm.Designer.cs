@@ -44,11 +44,17 @@ namespace FuelStationProgram
             this.crtlAddNewCustomer = new DevExpress.XtraBars.BarButtonItem();
             this.crtlAddNewEmployee = new DevExpress.XtraBars.BarButtonItem();
             this.crtlAddNewItem = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
+            this.ctrlEditCustomer = new DevExpress.XtraBars.BarButtonItem();
+            this.ctrlEditEmployee = new DevExpress.XtraBars.BarButtonItem();
+            this.ctrlEditItem = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
             this.label1 = new System.Windows.Forms.Label();
             this.crtlNewTransaction = new DevExpress.XtraEditors.SimpleButton();
             this.crtlCustomerCardNumber = new DevExpress.XtraEditors.TextEdit();
@@ -66,6 +72,8 @@ namespace FuelStationProgram
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabLedger = new DevExpress.XtraTab.XtraTabPage();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.btnSaveChanges = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.txtSqlPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -119,7 +127,6 @@ namespace FuelStationProgram
             // 
             this.gridView1.GridControl = this.gridControlCustomers;
             this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
             // 
             // barManager1
             // 
@@ -139,9 +146,15 @@ namespace FuelStationProgram
             this.barSubItem2,
             this.crtlAddNewCustomer,
             this.crtlAddNewItem,
-            this.crtlAddNewEmployee});
+            this.crtlAddNewEmployee,
+            this.barButtonItem1,
+            this.barSubItem3,
+            this.barSubItem4,
+            this.ctrlEditCustomer,
+            this.ctrlEditEmployee,
+            this.ctrlEditItem});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 8;
+            this.barManager1.MaxItemId = 14;
             this.barManager1.StatusBar = this.bar3;
             // 
             // bar2
@@ -152,14 +165,15 @@ namespace FuelStationProgram
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem4)});
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
             // barSubItem1
             // 
-            this.barSubItem1.Caption = "File...";
+            this.barSubItem1.Caption = "File";
             this.barSubItem1.Id = 0;
             this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.crtlConnectToDB),
@@ -190,7 +204,7 @@ namespace FuelStationProgram
             // 
             // barSubItem2
             // 
-            this.barSubItem2.Caption = "Add...";
+            this.barSubItem2.Caption = "Add";
             this.barSubItem2.Id = 4;
             this.barSubItem2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.crtlAddNewCustomer),
@@ -218,6 +232,37 @@ namespace FuelStationProgram
             this.crtlAddNewItem.Id = 6;
             this.crtlAddNewItem.Name = "crtlAddNewItem";
             this.crtlAddNewItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.crtlAddNewItem_ItemClick);
+            // 
+            // barSubItem4
+            // 
+            this.barSubItem4.Caption = "Edit";
+            this.barSubItem4.Id = 10;
+            this.barSubItem4.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.ctrlEditCustomer),
+            new DevExpress.XtraBars.LinkPersistInfo(this.ctrlEditEmployee),
+            new DevExpress.XtraBars.LinkPersistInfo(this.ctrlEditItem)});
+            this.barSubItem4.Name = "barSubItem4";
+            // 
+            // ctrlEditCustomer
+            // 
+            this.ctrlEditCustomer.Caption = "Customer";
+            this.ctrlEditCustomer.Id = 11;
+            this.ctrlEditCustomer.Name = "ctrlEditCustomer";
+            this.ctrlEditCustomer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ctrlEditCustomer_ItemClick);
+            // 
+            // ctrlEditEmployee
+            // 
+            this.ctrlEditEmployee.Caption = "Employee";
+            this.ctrlEditEmployee.Id = 12;
+            this.ctrlEditEmployee.Name = "ctrlEditEmployee";
+            this.ctrlEditEmployee.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ctrlEditEmployee_ItemClick);
+            // 
+            // ctrlEditItem
+            // 
+            this.ctrlEditItem.Caption = "Item";
+            this.ctrlEditItem.Id = 13;
+            this.ctrlEditItem.Name = "ctrlEditItem";
+            this.ctrlEditItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ctrlEditItem_ItemClick);
             // 
             // bar3
             // 
@@ -262,6 +307,18 @@ namespace FuelStationProgram
             this.barDockControlRight.Location = new System.Drawing.Point(1054, 20);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 553);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Edit";
+            this.barButtonItem1.Id = 8;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barSubItem3
+            // 
+            this.barSubItem3.Caption = "barSubItem3";
+            this.barSubItem3.Id = 9;
+            this.barSubItem3.Name = "barSubItem3";
             // 
             // label1
             // 
@@ -309,7 +366,7 @@ namespace FuelStationProgram
             this.xtraTabPane.Location = new System.Drawing.Point(0, 46);
             this.xtraTabPane.Name = "xtraTabPane";
             this.xtraTabPane.SelectedTabPage = this.tabCustomers;
-            this.xtraTabPane.Size = new System.Drawing.Size(942, 352);
+            this.xtraTabPane.Size = new System.Drawing.Size(751, 352);
             this.xtraTabPane.TabIndex = 29;
             this.xtraTabPane.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabCustomers,
@@ -322,14 +379,14 @@ namespace FuelStationProgram
             // 
             this.tabCustomers.Controls.Add(this.gridControlCustomers);
             this.tabCustomers.Name = "tabCustomers";
-            this.tabCustomers.Size = new System.Drawing.Size(940, 327);
+            this.tabCustomers.Size = new System.Drawing.Size(749, 327);
             this.tabCustomers.Text = "Customers";
             // 
             // tabEmployees
             // 
             this.tabEmployees.Controls.Add(this.gridControlEmployees);
             this.tabEmployees.Name = "tabEmployees";
-            this.tabEmployees.Size = new System.Drawing.Size(940, 327);
+            this.tabEmployees.Size = new System.Drawing.Size(749, 327);
             this.tabEmployees.Text = "Employees";
             // 
             // gridControlEmployees
@@ -346,13 +403,12 @@ namespace FuelStationProgram
             // 
             this.gridView2.GridControl = this.gridControlEmployees;
             this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsBehavior.Editable = false;
             // 
             // tabItems
             // 
             this.tabItems.Controls.Add(this.gridControlItems);
             this.tabItems.Name = "tabItems";
-            this.tabItems.Size = new System.Drawing.Size(940, 327);
+            this.tabItems.Size = new System.Drawing.Size(749, 327);
             this.tabItems.Text = "Items";
             // 
             // gridControlItems
@@ -375,7 +431,7 @@ namespace FuelStationProgram
             // 
             this.tabTransactions.Controls.Add(this.gridControlTransactions);
             this.tabTransactions.Name = "tabTransactions";
-            this.tabTransactions.Size = new System.Drawing.Size(940, 327);
+            this.tabTransactions.Size = new System.Drawing.Size(749, 327);
             this.tabTransactions.Text = "Transactions";
             // 
             // gridControlTransactions
@@ -393,11 +449,12 @@ namespace FuelStationProgram
             // 
             this.gridView4.GridControl = this.gridControlTransactions;
             this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsBehavior.Editable = false;
             // 
             // tabLedger
             // 
             this.tabLedger.Name = "tabLedger";
-            this.tabLedger.Size = new System.Drawing.Size(940, 327);
+            this.tabLedger.Size = new System.Drawing.Size(749, 327);
             this.tabLedger.Text = "Ledger";
             // 
             // tablePanel1
@@ -416,11 +473,38 @@ namespace FuelStationProgram
             this.tablePanel1.Size = new System.Drawing.Size(450, 159);
             this.tablePanel1.TabIndex = 34;
             // 
+            // btnSaveChanges
+            // 
+            this.btnSaveChanges.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnSaveChanges.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.btnSaveChanges.Appearance.Options.UseBackColor = true;
+            this.btnSaveChanges.Appearance.Options.UseFont = true;
+            this.btnSaveChanges.Location = new System.Drawing.Point(800, 360);
+            this.btnSaveChanges.Name = "btnSaveChanges";
+            this.btnSaveChanges.Size = new System.Drawing.Size(120, 39);
+            this.btnSaveChanges.TabIndex = 42;
+            this.btnSaveChanges.Text = "Save Changes";
+            this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnDelete.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.btnDelete.Appearance.Options.UseBackColor = true;
+            this.btnDelete.Appearance.Options.UseFont = true;
+            this.btnDelete.Location = new System.Drawing.Point(800, 315);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(120, 39);
+            this.btnDelete.TabIndex = 47;
+            this.btnDelete.Text = "Delete";
+            // 
             // ViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1054, 593);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnSaveChanges);
             this.Controls.Add(this.tablePanel1);
             this.Controls.Add(this.xtraTabPane);
             this.Controls.Add(this.label1);
@@ -496,6 +580,14 @@ namespace FuelStationProgram
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraTab.XtraTabPage tabLedger;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
+        private DevExpress.XtraEditors.SimpleButton btnSaveChanges;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarSubItem barSubItem4;
+        private DevExpress.XtraBars.BarButtonItem ctrlEditCustomer;
+        private DevExpress.XtraBars.BarButtonItem ctrlEditEmployee;
+        private DevExpress.XtraBars.BarButtonItem ctrlEditItem;
+        private DevExpress.XtraBars.BarSubItem barSubItem3;
+        private DevExpress.XtraEditors.SimpleButton btnDelete;
     }
 }
 

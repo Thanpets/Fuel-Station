@@ -22,6 +22,7 @@ namespace FuelStationProgram
         public string ConnString { get; set; }
         public SqlConnection Conn { get; set; }
         public DataSet MasterData = new DataSet();
+        public DataSet OldMasterData = new DataSet();
         public ViewForm()
         {
             InitializeComponent();
@@ -34,9 +35,9 @@ namespace FuelStationProgram
             gridControlEmployees.Visible = false;
             gridControlItems.Visible = false;
             gridControlTransactions.Visible = false;
+            btnDelete.Visible = false;
+            btnSaveChanges.Visible = false;
         }
-
-
         private void crtlExitApplication_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Application.Exit();
@@ -49,48 +50,23 @@ namespace FuelStationProgram
         {
             SqlLoadTables();
         }
-
         private void crtlAddNewCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            if (true) {
-                AddCustomer();
+            if (Conn == null) {
+                return;
             }
-            else {
-                MessageBox.Show("No database connection has been established");
-            }
+            AddCustomer();
         }
-
-
-
         private void crtlAddNewEmployee_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            if (true) {
-                AddEmployee();
+            if (Conn == null) {
+                return;
             }
-            else {
-                MessageBox.Show("No database connection has been established");
-            }
+            AddEmployee();
         }
-
         private void crtlAddNewItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            if (true) {
-                AddItem();
+            if (Conn == null) {
+                return;
             }
-            else {
-                MessageBox.Show("No database connection has been established");
-            }
-        }
-        private void editCustomer(object sender, EventArgs e)
-        {
-            DataRow dr = ((GridView)gridControlCustomers.MainView).GetFocusedDataRow();
-            Customer customer = new Customer
-            {
-                ID = new Guid(),
-                Name = dr.ItemArray[1].ToString(),
-                Surname = dr.ItemArray[2].ToString(),
-                CardNumber = 0
-            };
-            DataEditForm form = new DataEditForm();
-            form.EditObject = customer;
-            form.Show();
+            AddItem();
         }
         private void crtlNewTransaction_Click(object sender, EventArgs e)
         {
@@ -129,9 +105,25 @@ namespace FuelStationProgram
 
             
         }
+        private void ctrlEditCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+            //if (Conn == null) {
+            //    return;
+            //}
+            //EditCustomer();
+        }
+        private void ctrlEditEmployee_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
 
-        
+        }
+        private void ctrlEditItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+
+        }
+
+        private void btnSaveChanges_Click(object sender, EventArgs e) {
+            SaveChanges("Customers");
+        }
+
         #endregion
+
         #region Methods
 
 
@@ -150,24 +142,38 @@ namespace FuelStationProgram
         }
         private void SqlLoadTables()
         {
+            btnDelete.Visible = true;
+            btnSaveChanges.Visible = true;
+            BindingSource bindingSourceCustomers = new BindingSource();
+            BindingSource bindingSourceEmployees = new BindingSource();
+            BindingSource bindingSourceItems = new BindingSource();
+            BindingSource bindingSourceTransactions = new BindingSource();
             try {
                 SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectCustomers, Conn);
                 MasterData.Clear();
                 adapter.Fill(MasterData, "Customers");
-                gridControlCustomers.DataSource = MasterData.Tables["Customers"];
+                adapter.Fill(OldMasterData, "Customers");
+                bindingSourceCustomers.DataSource = MasterData.Tables["Customers"];
+                gridControlCustomers.DataSource = bindingSourceCustomers;
 
                 adapter = new SqlDataAdapter(Resources.SelectEmployees, Conn);
                 adapter.Fill(MasterData, "Employees");
-                gridControlEmployees.DataSource = MasterData.Tables["Employees"];
+                adapter.Fill(OldMasterData, "Employees");
+                bindingSourceEmployees.DataSource = MasterData.Tables["Employees"];
+                gridControlEmployees.DataSource = bindingSourceEmployees;
 
                 adapter = new SqlDataAdapter(Resources.SelectItems, Conn);
                 adapter.Fill(MasterData, "Items");
-                gridControlItems.DataSource = MasterData.Tables["Items"];
+                adapter.Fill(OldMasterData, "Items");
+                bindingSourceItems.DataSource = MasterData.Tables["Items"];
+                gridControlItems.DataSource = bindingSourceItems;
 
+                adapter = new SqlDataAdapter(Resources.SelectTransactions, Conn);
+                adapter.Fill(MasterData, "Transactions");
+                adapter.Fill(OldMasterData, "Transactions");
+                bindingSourceTransactions.DataSource = MasterData.Tables["Transactions"];
+                gridControlTransactions.DataSource = bindingSourceTransactions;
 
-                //adapter.SelectCommand = new SqlCommand(Resources.SelectTransactions, Conn);
-                //adapter.Fill(MasterData, "Transactions");
-                //gridControlItems.DataSource = MasterData.Tables["Transactions"];
 
 
                 gridControlCustomers.Refresh();
@@ -194,13 +200,14 @@ namespace FuelStationProgram
                 gridView3.Columns["Description"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
                 gridView3.EndDataUpdate();
 
-                //gridControlTransactions.Refresh();
-                //gridControlTransactions.Visible = true;
-                //gridView4.Columns["ID"].Visible = false;
-                //gridView4.BeginDataUpdate();
-                //gridView4.ClearSorting();
-                //gridView4.Columns["Date"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                //gridView4.EndDataUpdate();
+                gridControlTransactions.Refresh();
+                gridControlTransactions.Visible = true;
+                gridView4.Columns["ID"].Visible = false;
+                gridView4.Columns["CustomerID"].Visible = false;
+                gridView4.BeginDataUpdate();
+                gridView4.ClearSorting();
+                gridView4.Columns["Date"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                gridView4.EndDataUpdate();
 
 
             }
@@ -212,6 +219,9 @@ namespace FuelStationProgram
 
         private void RefreshTables() {
             gridControlCustomers.Refresh();
+            gridControlEmployees.Refresh();
+            gridControlItems.Refresh();
+            gridControlTransactions.Refresh();
         }
 
         private void AddCustomer() {
@@ -280,6 +290,24 @@ namespace FuelStationProgram
                 }
             }
         }
+        //private void EditCustomer() {
+        //    DataRow dr = ((GridView)gridControlCustomers.MainView).GetFocusedDataRow();
+        //    Customer customer = new Customer {
+        //        Name = dr.ItemArray[1].ToString(),
+        //        Surname = dr.ItemArray[2].ToString(),
+        //        CardNumber = Convert.ToInt32(dr.ItemArray[3])
+        //    };
+        //    DataEditForm form = new DataEditForm();
+        //    form.EditObject = customer;
+        //    form.Show();
+        //    if (form.DialogResult == DialogResult.OK) {
+        //        dr["Name"] = customer.Name;
+        //        dr["Surname"] = customer.Surname;
+        //        dr["CardNumber"] = customer.CardNumber.ToString();
+                
+        //        RefreshTables();
+        //    }
+        //}
         private bool CustomerExists()
         {
             if (crtlCustomerCardNumber.EditValue == null || string.IsNullOrEmpty(crtlCustomerCardNumber.EditValue.ToString()))
@@ -294,6 +322,85 @@ namespace FuelStationProgram
             //more validation on empty input,and start without connection
             adapter.Fill(customerDataTable);
                 return customerDataTable.Tables[0].Rows.Count > 0;
+        }
+
+        private void SaveChanges(string tableName) {
+            if (!MasterData.HasChanges()) {
+                MessageBox.Show("No changes were made.");
+                return;
+            }
+
+            List<string> sqlCommands = new List<string>();
+            var MasterDataChanges = MasterData.GetChanges();
+
+            string primaryKey = "ID";
+            foreach (DataRow row in MasterDataChanges.Tables[tableName].Rows) {
+                
+                string sql = string.Empty;
+                string sqlSet = string.Empty;
+
+                List<string> sqlSetLines = new List<string>();
+                List<string> sqlWhereLines = new List<string>();
+                string selectExpression = string.Format("ID = '{0}'", row[primaryKey].ToString());
+                
+                DataRow rowOld = OldMasterData.Tables[tableName].Select(selectExpression)[0];
+                foreach (DataColumn column in MasterData.Tables[tableName].Columns) {
+
+                    if (column.ColumnName == primaryKey) {
+                        ComposeQueryField(sqlWhereLines, column.ColumnName, row[column.ColumnName]);
+                    }
+                    else {
+
+                        if (row[column.ColumnName].ToString() != rowOld[column.ColumnName].ToString()) {
+
+                            ComposeQueryField(sqlSetLines, column.ColumnName, row[column.ColumnName]);
+                        }
+                    }
+                }
+
+                sqlSet = string.Join(",", sqlSetLines);
+
+                if (sqlSetLines.Count > 0) {
+                    sql = "UPDATE " + MasterData.Tables[tableName].TableName + " SET " + sqlSet + " WHERE " + string.Join(",", sqlWhereLines);
+                    sqlCommands.Add(sql);
+                }
+
+            }
+        }
+
+
+        private void ComposeQueryField(List<string> sqlLine, string columnName, object value) {
+
+            switch (value.GetType().Name) {
+                case "Guid":
+                    sqlLine.Add(string.Format("{0}='{1}'", columnName, value));
+                    break;
+                case "String":
+                    sqlLine.Add(string.Format("{0}='{1}'", columnName, value));
+                    break;
+
+                case "Int32":
+                case "Int64":
+                    sqlLine.Add(string.Format("{0}={1}", columnName, value));
+                    break;
+
+                case "DateTime":
+                    string datePart = Convert.ToDateTime(value).ToString("yyyyMMdd");
+                    sqlLine.Add(string.Format("{0}='{1}'", columnName, datePart));
+                    break;
+
+                case "Decimal":
+
+                    // decimal provider , .
+
+                    string decimalPart = Convert.ToDecimal(value).ToString().Replace(',', '.');
+
+                    sqlLine.Add(string.Format("{0}={1}", columnName, decimalPart));
+                    break;
+            }
+
+
+
         }
     }
 
