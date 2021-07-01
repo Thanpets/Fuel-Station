@@ -93,7 +93,7 @@ namespace FuelStationProgram
 
                     form.Conn = Conn;
                     form.Transaction = transaction;
-                    form.Show();
+                    form.ShowDialog();
 
                 }
                 catch (Exception ex)
@@ -101,22 +101,27 @@ namespace FuelStationProgram
 
                     MessageBox.Show(ex.Message);
                 }
-      
+
+                SqlDataAdapter adapter = new SqlDataAdapter(Resources.SelectTransactions, Conn);
+                MasterData.Tables["Transactions"].Clear();
+                OldMasterData.Tables["Transactions"].Clear();
+                adapter.Fill(MasterData, "Transactions");
+                adapter.Fill(OldMasterData, "Transactions");
+                MasterData.AcceptChanges();
+                gridControl1.Refresh();
             }
             else
             {
                 MessageBox.Show("Customer does not exist,or card registration number field is empty");
             }
 
-            
-        }
 
+        }
         private void btnSaveChanges_Click(object sender, EventArgs e) {
             if (!MasterData.HasChanges()) {
                 MessageBox.Show("No changes were made.");
                 return;
             }
-            //check item valid enum change
             SaveAdds("Customers");
             SaveAdds("Employees");
             SaveAdds("Items");
@@ -131,7 +136,6 @@ namespace FuelStationProgram
             RefreshTables();
 
         }
-
         private void btnDelete_Click(object sender, EventArgs e) {
             DeleteEntity();
         }
@@ -270,7 +274,6 @@ namespace FuelStationProgram
             }
 
         }
-
         private void RefreshTables() {
             gridControlCustomers.Refresh();
             gridControlEmployees.Refresh();
@@ -280,7 +283,6 @@ namespace FuelStationProgram
             LoadTransactionLinesToGrid();
             gridControl1.Refresh();
         }
-
         private void AddCustomer() {
             DataEditForm form = new DataEditForm();
             Customer newCustomer = new Customer();
@@ -302,7 +304,6 @@ namespace FuelStationProgram
                 }
             }
         }
-
         private void AddEmployee() {
             DataEditForm form = new DataEditForm();
             Employee newEmployee = new Employee();
@@ -326,7 +327,6 @@ namespace FuelStationProgram
                 }
             }
         }
-
         private void AddItem() {
             DataEditForm form = new DataEditForm();
             Items newItem = new Items();
@@ -375,7 +375,6 @@ namespace FuelStationProgram
             }
                 
         }
-
         private void SaveChanges(string tableName) {
             if (!MasterData.HasChanges()) {
                 return;
@@ -433,7 +432,6 @@ namespace FuelStationProgram
                 adapter.Fill(OldMasterData, tableName);
             }
         }
-
         private void ComposeQueryField(List<string> sqlLine, string columnName, object value) {
 
             switch (value.GetType().Name) {
@@ -467,8 +465,6 @@ namespace FuelStationProgram
 
 
         }
-
-
         private void DeleteEntity() {
             string selectedTab = xtraTabPane.SelectedTabPage.Text;
             switch (selectedTab) {
@@ -577,7 +573,6 @@ namespace FuelStationProgram
             gridView6.Columns["Value"].Visible = true;
             gridView6.Columns["ItemDescription"].VisibleIndex = 0;
         }
-
         private void LoadTransactionLinesToGrid() {
             SqlDataAdapter adapter = new SqlDataAdapter("Select * from transactionlines", Conn);
 
@@ -588,8 +583,10 @@ namespace FuelStationProgram
             newCol.AllowDBNull = true;
             newCol.ColumnName = "ItemDescription";
             newCol.Caption = "Items Description";
-
-            adapter.Fill(MasterData, "TransactionLines");
+            try {
+                adapter.Fill(MasterData, "TransactionLines");
+            }
+            catch { }
 
             if (!MasterData.Tables["TransactionLines"].Columns.Contains("ItemDescription")) {
                 MasterData.Tables["TransactionLines"].Columns.Add(newCol);
@@ -616,7 +613,6 @@ namespace FuelStationProgram
             }
 
         }
-
         private void btnCalculate_Click(object sender, EventArgs e) {
             DateTime dateStart = Convert.ToDateTime(dateEdit1.EditValue);
             DateTime dateEnd = Convert.ToDateTime(dateEdit2.EditValue);
