@@ -114,8 +114,11 @@ namespace FuelStationProgram
             SaveChanges("Customers");
             SaveChanges("Employees");
             SaveChanges("Items");
-            SaveChanges("Transactions");
             MasterData.AcceptChanges();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e) {
+            DeleteEntity();
         }
 
         #endregion
@@ -357,7 +360,6 @@ namespace FuelStationProgram
             }
         }
 
-
         private void ComposeQueryField(List<string> sqlLine, string columnName, object value) {
 
             switch (value.GetType().Name) {
@@ -391,6 +393,35 @@ namespace FuelStationProgram
 
 
         }
+
+
+        private void DeleteEntity() {
+            string selectedTab = xtraTabPane.SelectedTabPage.Text;
+            DataRow dr;
+            switch (selectedTab) {
+                case "Customers":
+                    dr = gridView1.GetFocusedDataRow();
+                    //dr["ID"];
+                    break;
+                case "Employees":
+                    dr = gridView2.GetFocusedDataRow();
+                    //dr["ID"];
+                    break;
+                case "Items":
+                    dr = gridView3.GetFocusedDataRow();
+                    //dr["ID"];
+                    break;
+                case "Transactions":
+                    dr = gridView4.GetFocusedDataRow();
+                    //dr["ID"];
+                    break;
+                default:
+                    break;
+            }
+            RefreshTables();
+        }
+
+
     }
 
     #endregion

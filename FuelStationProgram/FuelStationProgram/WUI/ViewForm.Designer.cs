@@ -71,6 +71,7 @@ namespace FuelStationProgram
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.btnSaveChanges = new DevExpress.XtraEditors.SimpleButton();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSqlPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -90,6 +91,7 @@ namespace FuelStationProgram
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtSqlPath
@@ -115,6 +117,8 @@ namespace FuelStationProgram
             this.gridControlCustomers.Location = new System.Drawing.Point(0, 0);
             this.gridControlCustomers.MainView = this.gridView1;
             this.gridControlCustomers.Name = "gridControlCustomers";
+            this.gridControlCustomers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemLookUpEdit1});
             this.gridControlCustomers.Size = new System.Drawing.Size(749, 329);
             this.gridControlCustomers.TabIndex = 5;
             this.gridControlCustomers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -465,6 +469,14 @@ namespace FuelStationProgram
             this.btnDelete.Size = new System.Drawing.Size(120, 39);
             this.btnDelete.TabIndex = 47;
             this.btnDelete.Text = "Delete";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // repositoryItemLookUpEdit1
+            // 
+            this.repositoryItemLookUpEdit1.AutoHeight = false;
+            this.repositoryItemLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEdit1.Name = "repositoryItemLookUpEdit1";
             // 
             // ViewForm
             // 
@@ -505,6 +517,7 @@ namespace FuelStationProgram
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -554,6 +567,7 @@ namespace FuelStationProgram
 
         private DevExpress.XtraBars.BarSubItem barSubItem3;
         private DevExpress.XtraEditors.SimpleButton btnDelete;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
     }
 }
 
